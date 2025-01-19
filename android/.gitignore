@@ -1,0 +1,30 @@
+# Gradle files
+gradle-wrapper.jar
+/.gradle
+/captures/
+/gradlew
+/gradlew.bat
+/local.properties
+GeneratedPluginRegistrant.java
+
+# Flutter build and dependency files
+/build/
+/.dart_tool/
+/.flutter-plugins
+.flutter-plugins-dependencies
+/pub-cache/
+.packages
+.pub/
+
+# Keystore files (never share your keystore publicly)
+key.properties
+**/*.keystore
+**/*.jks
+
+# Android Studio/IntelliJ project files
+.idea/
+*.iml
+
+# OS generated files (macOS, Windows, etc.)
+.DS_Store
+Thumbs.db

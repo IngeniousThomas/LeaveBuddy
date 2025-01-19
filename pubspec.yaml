@@ -1,0 +1,76 @@
+name: leavebuddy
+description: "A new Flutter project."
+# The following line prevents the package from being accidentally published to
+# pub.dev using `flutter pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+# The following defines the version and build number for your application.
+# A version number is three numbers separated by dots, like 1.2.43
+# followed by an optional build number separated by a `+`.
+# Both the version and the builder number may be overridden in flutter
+# build by specifying --build-name and --build-number, respectively.
+# In Android, build-name is used as versionName while build-number is used as versionCode.
+# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
+# In iOS, build-name is used as CFBundleShortVersionString while build-number is used as CFBundleVersion.
+# Read more about iOS versioning at
+# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+# In Windows, build-name is used as the major, minor, and patch parts
+# of the product and file versions while build-number is used as the build suffix.
+version: 1.0.0+1
+
+environment:
+  # Specify the Dart SDK version
+  sdk: ">=3.6.1 <4.0.0"
+
+# Dependencies specify other packages that your package needs in order to work.
+# To automatically upgrade your package dependencies to the latest versions
+# consider running `flutter pub upgrade --major-versions`. Alternatively,
+# dependencies can be manually updated by changing the version numbers below to
+# the latest version available on pub.dev. To see which dependencies have newer
+# versions available, run `flutter pub outdated`.
+dependencies:
+  flutter:
+    sdk: flutter
+  shared_preferences: ^2.0.15
+  flutter_launcher_icons: ^0.13.1 # Used for generating launcher icons
+  cupertino_icons: ^1.0.8         # iOS-style icons
+  table_calendar: ^3.0.6          # Calendar widget for displaying events
+  url_launcher: ^6.1.5            # For launching URLs
+  font_awesome_flutter: ^10.4.0   # Font Awesome icons for Flutter
+
+# Development-only dependencies
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0 # Lint rules for improving code quality
+
+# Configuration for flutter_launcher_icons
+flutter_icons:
+  # Android-specific configuration
+  android: "launcher_icon" # Icon name for Android
+  ios: true                # Enable icon generation for iOS
+  image_path: "assets/icon/abouticon.png" # Base icon file for all platforms
+  web:
+    generate: true
+    image_path: "assets/icon/abouticon.png" # Path to the web icon
+    background_color: "#FFFFFF"            # Background color for web
+    theme_color: "#4CAF50"                 # Theme color for web
+  windows:
+    generate: true
+    image_path: "assets/icon/abouticon.png" # Path to the Windows icon
+    icon_size: 48                           # Icon size for Windows
+  macos:
+    generate: true
+    image_path: "assets/icon/abouticon.png" # Path to the macOS icon
+
+# The following section is specific to Flutter packages.
+flutter:
+  uses-material-design: true # Ensures Material Icons font is included
+
+  # Assets included in the app
+  assets:
+    - assets/icon/abouticon.png  # App icon for all platforms
+    - assets/bg.png              # Background for UI
+    - assets/text.png            # Text overlay asset
+    - assets/splashbg.png        # Splash screen background
+    - assets/splashtext.png      # Splash screen logo text
