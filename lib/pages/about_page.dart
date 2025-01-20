@@ -81,19 +81,6 @@ class AboutPage extends StatelessWidget {
                             'https://leavebuddy.vercel.app/'),
                       ),
                       ListTile(
-                        leading: const Icon(Icons.email, color: Colors.deepPurple),
-                        title: const Text('Email'),
-                        subtitle: const Text('arunthomas04042001@gmail.com'),
-                        onTap: () =>
-                            _launchURL('mailto:arunthomas04042001@gmail.com'),
-                      ),
-                      ListTile(
-                        leading: const Icon(Icons.telegram, color: Colors.deepPurple),
-                        title: const Text('Telegram'),
-                        subtitle: const Text('@requaza'),
-                        onTap: () => _launchURL('https://t.me/requaza'),
-                      ),
-                      ListTile(
                         leading: const FaIcon(FontAwesomeIcons.linkedin, color: Colors.deepPurple),
                         title: const Text('LinkedIn'),
                         subtitle: const Text('linkedin.com/in/arunthomas-hyd'),
