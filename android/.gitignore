@@ -8,7 +8,6 @@ gradle-wrapper.jar
 GeneratedPluginRegistrant.java
 
 # Flutter build and dependency files
-/build/
 /.dart_tool/
 /.flutter-plugins
 .flutter-plugins-dependencies

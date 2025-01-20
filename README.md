@@ -22,14 +22,14 @@ Reach out to me - Mail: arunthomas04042001@gmail.com / Telegram: https://t.me/@r
 
 ## **Screenshots**
 
-![Logo](https://github.com/user-attachments/assets/942a7b0b-b42e-4703-9f46-9deab762c8eb)
-![SplashScreen](https://github.com/user-attachments/assets/ed356eae-ae92-4ae8-9144-3a45c5a82210)
-![NavigationPage](https://github.com/user-attachments/assets/7634d09d-d3d2-4bc6-8944-0deb12a9d286)
-![AboutPage](https://github.com/user-attachments/assets/3b570728-fd7d-49ce-88f9-7ff78758a821)
-![HomePage](https://github.com/user-attachments/assets/af0b6093-7a70-49b5-9290-839c83fd4ec0)
-![HomeDelete](https://github.com/user-attachments/assets/e3a10a53-be3b-4087-95f0-f68dec9f6891)
-![CalendarPage](https://github.com/user-attachments/assets/6cf4130b-a843-4d60-8b00-1871028f268b)
+![Logo](https://github.com/user-attachments/assets/6e3adfe9-1ca4-4491-9edf-71faddfb59d0)
+![SplashScreen](https://github.com/user-attachments/assets/43c002be-35a5-4a29-93bc-41a624ce88a3)
+![NavigationPage](https://github.com/user-attachments/assets/f87d4167-d7c8-44f6-a41b-57b4e0d5d771)
+![AboutPage](https://github.com/user-attachments/assets/74ee9df1-13b7-45f2-8e71-98a2a22a76f5)
+![HomePage](https://github.com/user-attachments/assets/20ad9378-78ba-467b-8c7d-7613d4fc137d)
+![HomeDelete](https://github.com/user-attachments/assets/777dfb5e-aa9d-44ae-9818-a9ac58b6062f)
+![CalendarPage](https://github.com/user-attachments/assets/9b4646c0-3224-42cd-b420-56afe841fcf3)
+
 
 ---
 
-# LeaveBuddy

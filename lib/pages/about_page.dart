@@ -43,8 +43,7 @@ class AboutPage extends StatelessWidget {
 
               // description of Leave Buddy
               const Text(
-                'Leave Buddy helps you track and manage leaves. '
-                'Web and iOS support coming soon :) ',
+                'Leave Buddy helps you track and manage leaves. ',
                 style: TextStyle(
                   fontSize: 16,
                   color: Colors.grey,
@@ -75,6 +74,13 @@ class AboutPage extends StatelessWidget {
                       ),
                       const SizedBox(height: 12),
                       ListTile(
+                        leading: const Icon(Icons.cloud_circle_sharp, color: Colors.deepPurple),
+                        title: const Text('Website'),
+                        subtitle: const Text('leavebuddy.vercel.app'),
+                        onTap: () => _launchURL(
+                            'https://leavebuddy.vercel.app/'),
+                      ),
+                      ListTile(
                         leading: const Icon(Icons.email, color: Colors.deepPurple),
                         title: const Text('Email'),
                         subtitle: const Text('arunthomas04042001@gmail.com'),
@@ -94,12 +100,19 @@ class AboutPage extends StatelessWidget {
                         onTap: () => _launchURL(
                             'https://www.linkedin.com/in/arunthomas-hyd/'),
                       ),
+                      ListTile(
+                        leading: const FaIcon(FontAwesomeIcons.github, color: Colors.deepPurple),
+                        title: const Text('Github'),
+                        subtitle: const Text('github.com/IngeniousThomas/LeaveBuddy - for App Updates'),
+                        onTap: () => _launchURL(
+                            'https://github.com/IngeniousThomas/LeaveBuddy.git'),
+                      ),
                     ],
                   ),
                 ),
               ),
               const SizedBox(height: 16),
-
+              
               // Footer
               const Text(
                 'Made with ❤️ by Arun Thomas',
