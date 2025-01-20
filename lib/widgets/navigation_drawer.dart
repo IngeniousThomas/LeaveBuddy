@@ -60,7 +60,7 @@ class AppNavigationDrawer extends StatelessWidget {
           const Padding(
             padding: EdgeInsets.all(8.0),
             child: Text(
-              'V 1.0.1',
+              'V 1.1.0',
               style: TextStyle(
                 fontSize: 14,
                 color: Colors.grey,

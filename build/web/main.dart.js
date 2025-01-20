@@ -79716,7 +79716,7 @@ return A.T(A.anu(a),$async$mK)
 case 5:case 3:return A.K(null,r)}})
 return A.L($async$mK,r)},
 H(a){var s=null,r=A.aof(s,s,B.z3),q=A.l5(12),p=t.p
-return A.a8w(r,A.aFT(new A.bq(B.fI,A.dX(A.b([new A.Gu(new A.l1("assets/icon/abouticon.png",s,s),60,s),B.eW,B.T4,B.Od,B.Tb,B.Oa,A.WN(new A.bq(B.fI,A.dX(A.b([B.Bz,B.yy,A.og(B.F8,new A.Vo(this),B.SX,B.T8,s),A.og(B.Ey,new A.Vp(this),B.Tc,B.T7,s),A.og(B.Ez,new A.Vq(this),B.T3,B.Ta,s)],p),B.bu,B.K,B.ac),s),3,s,new A.co(q,B.l)),B.eW,B.Te,B.Oc,B.Tf],p),B.W,B.K,B.ac),s)),B.ip,s)}}
+return A.a8w(r,A.aFT(new A.bq(B.fI,A.dX(A.b([new A.Gu(new A.l1("assets/icon/abouticon.png",s,s),60,s),B.eW,B.T5,B.Od,B.Tc,B.Oa,A.WN(new A.bq(B.fI,A.dX(A.b([B.Bz,B.yy,A.og(B.F8,new A.Vo(this),B.SX,B.T9,s),A.og(B.Ey,new A.Vp(this),B.Td,B.T8,s),A.og(B.Ez,new A.Vq(this),B.T4,B.Tb,s)],p),B.bu,B.K,B.ac),s),3,s,new A.co(q,B.l)),B.eW,B.Tf,B.Oc,B.Tg],p),B.W,B.K,B.ac),s)),B.ip,s)}}
 A.Vo.prototype={
 $0(){return this.a.mK("https://leavebuddy.vercel.app/")},
 $S:0}
@@ -79878,7 +79878,7 @@ p=!k
 o=!p||r.e!=null?A.tq(!0,B.bl,!1,l,!0,B.F,l,A.Fo(),m.c,l,l,l,l,l,2,B.Fy,B.I,!0,l,!0,l,!1,l,B.bp,l,l,l,l,l,l,l,1,l,l,!1,"\u2022",l,l,l,l,l,!1,l,!1,l,!0,l,B.cy,l,l,B.bi,B.b8,l,l,l,l,l,l,l,B.ag,l,B.cU,l,l,l,l):l
 p=!p||r.e!=null
 n=t.p
-return A.FP(p?A.b([A.kq(B.f0,new A.aec(a),l),A.nC(!1,B.z4,l,l,B.by,l,l,l,l,new A.aed(r,m.c,k,a),l,l)],n):A.b([A.kq(B.T0,new A.aee(a),l)],n),o,s)},
+return A.FP(p?A.b([A.kq(B.f0,new A.aec(a),l),A.nC(!1,B.z4,l,l,B.by,l,l,l,l,new A.aed(r,m.c,k,a),l,l)],n):A.b([A.kq(B.T1,new A.aee(a),l)],n),o,s)},
 $S:62}
 A.aec.prototype={
 $0(){A.dO(this.a,!1).hb(null)
@@ -80022,7 +80022,7 @@ s=q.d.length
 if(s===0)s=B.By
 else s=new A.xX(new A.A1(new A.ahV(q),s,!0,!0,!0,p),B.Ee,B.aB,!1,p,p,B.ik,!1,p,s,B.I,B.hB,p,B.F,B.ab,p)
 o=A.b([A.hb(s,1)],o)
-if(q.r)o.push(A.fp(p,A.asV(p,B.Td,q.gacl(),A.aD2(p,p,B.k,p,p,p,p,p,p,B.JF,p,B.O8,p,p,p,p,p,p,p)),B.r,p,p,p,p,p,p,B.fI,p,p,p))
+if(q.r)o.push(A.fp(p,A.asV(p,B.Te,q.gacl(),A.aD2(p,p,B.k,p,p,p,p,p,p,B.JF,p,B.O8,p,p,p,p,p,p,p)),B.r,p,p,p,p,p,p,B.fI,p,p,p))
 o.push(B.tP)
 return A.a8w(n,A.dX(o,B.W,B.K,B.ac),B.ip,p)},
 act(a){var s,r=null
@@ -80142,7 +80142,7 @@ $0(){this.b.b=B.c.ap(this.c*4)/4},
 $S:0}
 A.ahA.prototype={
 $1(a){var s=null,r=this.a,q=t.p,p=A.dX(A.b([A.tq(!0,B.bl,!1,s,!0,B.F,s,A.Fo(),r.e,s,s,s,s,s,2,B.na,B.I,!0,s,!0,s,!1,s,B.bp,s,s,s,s,s,s,s,1,s,s,!1,"\u2022",s,s,s,s,s,!1,s,!1,s,!0,s,B.cy,s,s,B.bi,B.b8,s,s,s,s,s,s,s,B.ag,s,B.cU,s,s,s,s),B.eW,A.tq(!0,B.bl,!1,s,!0,B.F,s,A.Fo(),r.f,s,s,s,s,s,2,B.nb,B.I,!0,s,!0,s,!1,s,B.bp,s,s,s,B.yY,s,s,s,1,s,s,!1,"\u2022",s,s,s,s,s,!1,s,!1,s,!0,s,B.cy,s,s,B.bi,B.b8,s,s,s,s,s,s,s,B.ag,s,B.cU,s,s,s,s)],q),B.W,B.K,B.b4)
-return A.FP(A.b([A.kq(B.f0,new A.ahy(a),s),A.nC(!1,B.z4,s,s,B.by,s,s,s,s,new A.ahz(r,a),s,s)],q),p,B.T9)},
+return A.FP(A.b([A.kq(B.f0,new A.ahy(a),s),A.nC(!1,B.z4,s,s,B.by,s,s,s,s,new A.ahz(r,a),s,s)],q),p,B.Ta)},
 $S:62}
 A.ahy.prototype={
 $0(){A.dO(this.a,!1).hb(null)
@@ -80161,7 +80161,7 @@ r.push(new A.ly(s.e.a.a,B.c.ap(this.b*4)/4,s.x[B.e.aI(r.length,8)]))},
 $S:0}
 A.ahE.prototype={
 $1(a){var s=null,r=this.a,q=A.tq(!0,B.bl,!1,s,!0,B.F,s,A.Fo(),r.e,s,s,s,s,s,2,B.na,B.I,!0,s,!0,s,!1,s,B.bp,s,s,s,s,s,s,s,1,s,s,!1,"\u2022",s,s,s,s,s,!1,s,!1,s,!0,s,B.cy,s,s,B.bi,B.b8,s,s,s,s,s,s,s,B.ag,s,B.cU,s,s,s,s)
-return A.FP(A.b([A.kq(B.f0,new A.ahC(a),s),A.nC(!1,B.kG,s,s,B.by,s,s,s,s,new A.ahD(r,this.b,a),s,s)],t.p),q,B.T_)},
+return A.FP(A.b([A.kq(B.f0,new A.ahC(a),s),A.nC(!1,B.kG,s,s,B.by,s,s,s,s,new A.ahD(r,this.b,a),s,s)],t.p),q,B.T0)},
 $S:62}
 A.ahC.prototype={
 $0(){A.dO(this.a,!1).hb(null)
@@ -80178,7 +80178,7 @@ $0(){this.b.a=this.a.e.a.a},
 $S:0}
 A.FW.prototype={
 H(a){var s=null,r=t.p
-return new A.Hw(A.dX(A.b([new A.HA(new A.c1(s,A.asm(B.it,new A.l1("assets/bg.png",s,s),s),s,s,s,s,B.ap),A.ea(new A.HQ(B.ls,A.atj("assets/text.png",s,s),s),s,s),s),A.hb(A.apd(A.b([A.og(B.F9,new A.VS(a),s,B.T5,s),A.og(B.jg,new A.VT(a),s,B.SY,s),A.og(B.Fa,new A.VU(a),s,B.z3,s)],r),B.a5),1),B.KY],r),B.W,B.K,B.ac),s)}}
+return new A.Hw(A.dX(A.b([new A.HA(new A.c1(s,A.asm(B.it,new A.l1("assets/bg.png",s,s),s),s,s,s,s,B.ap),A.ea(new A.HQ(B.ls,A.atj("assets/text.png",s,s),s),s,s),s),A.hb(A.apd(A.b([A.og(B.F9,new A.VS(a),s,B.T6,s),A.og(B.jg,new A.VT(a),s,B.SZ,s),A.og(B.Fa,new A.VU(a),s,B.z3,s)],r),B.a5),1),B.KY],r),B.W,B.K,B.ac),s)}}
 A.VS.prototype={
 $0(){var s=t.X
 A.a5V(this.a,"/leave",s,s)},
@@ -84810,8 +84810,8 @@ B.lM=new A.l8(1,"twoWeeks")
 B.lN=new A.l8(2,"week")
 B.Bs=new A.nl(null)
 B.Bw=new A.qd(null,null,null,null,null,null,null)
-B.T1=new A.bX("No days selected",null,null,null,null,null,null,null,null,null)
-B.Bx=new A.e9(B.v,null,null,B.T1,null)
+B.T2=new A.bX("No days selected",null,null,null,null,null,null,null,null,null)
+B.Bx=new A.e9(B.v,null,null,B.T2,null)
 B.lT=new A.r(1,0.9607843137254902,0.9607843137254902,0.9607843137254902,B.f)
 B.D_=new A.r(1,0.9333333333333333,0.9333333333333333,0.9333333333333333,B.f)
 B.lU=new A.r(1,0.8784313725490196,0.8784313725490196,0.8784313725490196,B.f)
@@ -84826,14 +84826,14 @@ B.m3=new A.r(1,0.12941176470588237,0.12941176470588237,0.12941176470588237,B.f)
 B.Jr=new A.c3([50,B.iJ,100,B.lT,200,B.D_,300,B.lU,350,B.da,400,B.CS,500,B.m0,600,B.e2,700,B.db,800,B.c8,850,B.iM,900,B.m3],t.pl)
 B.jL=new A.om(B.Jr,1,0.6196078431372549,0.6196078431372549,0.6196078431372549,B.f)
 B.z1=new A.o(!0,B.jL,null,null,null,null,16,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
-B.SZ=new A.bX("No leave types added yet",null,B.z1,null,null,null,null,null,null,null)
-B.By=new A.e9(B.v,null,null,B.SZ,null)
+B.T_=new A.bX("No leave types added yet",null,B.z1,null,null,null,null,null,null,null)
+B.By=new A.e9(B.v,null,null,B.T_,null)
 B.cB=new A.hc(6)
 B.R2=new A.o(!0,null,null,null,null,null,20,B.cB,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
 B.SV=new A.bX("Contact",null,B.R2,null,null,null,null,null,null,null)
 B.Bz=new A.e9(B.v,null,null,B.SV,null)
-B.T6=new A.bX("Select a day to view events",null,null,null,null,null,null,null,null,null)
-B.BA=new A.e9(B.v,null,null,B.T6,null)
+B.T7=new A.bX("Select a day to view events",null,null,null,null,null,null,null,null,null)
+B.BA=new A.e9(B.v,null,null,B.T7,null)
 B.BB=new A.vV(null,null,null,null,null,null,null,null,null)
 B.BC=new A.vW(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
 B.iA=new A.dg(0,B.l)
@@ -86504,12 +86504,12 @@ B.eC=new A.Jq(1,"landscape")
 B.KV=new A.yF(null)
 B.KW=new A.Jt(0,"start")
 B.KX=new A.Jt(1,"end")
-B.Ra=new A.o(!0,B.jL,null,null,null,null,10,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
-B.T2=new A.bX("Made with \u2764\ufe0f by Arun Thomas",null,B.Ra,null,null,null,null,null,null,null)
-B.tP=new A.bq(B.fJ,B.T2,null)
 B.z2=new A.o(!0,B.jL,null,null,null,null,14,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
-B.Tg=new A.bX("V 1.0.1",null,B.z2,B.ck,null,null,null,null,null,null)
-B.KY=new A.bq(B.fJ,B.Tg,null)
+B.SY=new A.bX("V 1.1.0",null,B.z2,B.ck,null,null,null,null,null,null)
+B.KY=new A.bq(B.fJ,B.SY,null)
+B.Ra=new A.o(!0,B.jL,null,null,null,null,10,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
+B.T3=new A.bX("Made with \u2764\ufe0f by Arun Thomas",null,B.Ra,null,null,null,null,null,null,null)
+B.tP=new A.bq(B.fJ,B.T3,null)
 B.tQ=new A.yJ(null)
 B.cO=new A.Jz(0,"fill")
 B.bE=new A.Jz(1,"stroke")
@@ -87152,25 +87152,25 @@ B.z3=new A.bX("About",null,null,null,null,null,null,null,null,null)
 B.SW=new A.bX("Leave Buddy",null,null,null,null,null,null,null,null,null)
 B.SX=new A.bX("leavebuddy.vercel.app",null,null,null,null,null,null,null,null,null)
 B.kG=new A.bX("Save",null,null,null,null,null,null,null,null,null)
-B.SY=new A.bX("Calendar",null,null,null,null,null,null,null,null,null)
-B.T_=new A.bX("Edit Leave Type Name",null,null,null,null,null,null,null,null,null)
-B.T0=new A.bX("OK",null,null,null,null,null,null,null,null,null)
-B.T3=new A.bX("github.com/IngeniousThomas/LeaveBuddy - for App Updates",null,null,null,null,null,null,null,null,null)
+B.SZ=new A.bX("Calendar",null,null,null,null,null,null,null,null,null)
+B.T0=new A.bX("Edit Leave Type Name",null,null,null,null,null,null,null,null,null)
+B.T1=new A.bX("OK",null,null,null,null,null,null,null,null,null)
+B.T4=new A.bX("github.com/IngeniousThomas/LeaveBuddy - for App Updates",null,null,null,null,null,null,null,null,null)
 B.R3=new A.o(!0,null,null,null,null,null,24,B.cB,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
-B.T4=new A.bX("What is Leave Buddy?",null,B.R3,null,null,null,null,null,null,null)
-B.T5=new A.bX("Leaves",null,null,null,null,null,null,null,null,null)
+B.T5=new A.bX("What is Leave Buddy?",null,B.R3,null,null,null,null,null,null,null)
+B.T6=new A.bX("Leaves",null,null,null,null,null,null,null,null,null)
 B.z4=new A.bX("Add",null,null,null,null,null,null,null,null,null)
-B.T7=new A.bX("LinkedIn",null,null,null,null,null,null,null,null,null)
-B.T8=new A.bX("Website",null,null,null,null,null,null,null,null,null)
-B.T9=new A.bX("Add New Leave Type",null,null,null,null,null,null,null,null,null)
-B.Ta=new A.bX("Github",null,null,null,null,null,null,null,null,null)
-B.Tb=new A.bX("Leave Buddy helps you track and manage leaves. ",null,B.z1,B.ck,null,null,null,null,null,null)
+B.T8=new A.bX("LinkedIn",null,null,null,null,null,null,null,null,null)
+B.T9=new A.bX("Website",null,null,null,null,null,null,null,null,null)
+B.Ta=new A.bX("Add New Leave Type",null,null,null,null,null,null,null,null,null)
+B.Tb=new A.bX("Github",null,null,null,null,null,null,null,null,null)
+B.Tc=new A.bX("Leave Buddy helps you track and manage leaves. ",null,B.z1,B.ck,null,null,null,null,null,null)
 B.f0=new A.bX("Cancel",null,null,null,null,null,null,null,null,null)
-B.Tc=new A.bX("linkedin.com/in/arunthomas-hyd",null,null,null,null,null,null,null,null,null)
-B.Td=new A.bX("+  Add New Leave Type",null,null,null,null,null,null,null,null,null)
-B.Te=new A.bX("Made with \u2764\ufe0f by Arun Thomas",null,B.z2,B.ck,null,null,null,null,null,null)
+B.Td=new A.bX("linkedin.com/in/arunthomas-hyd",null,null,null,null,null,null,null,null,null)
+B.Te=new A.bX("+  Add New Leave Type",null,null,null,null,null,null,null,null,null)
+B.Tf=new A.bX("Made with \u2764\ufe0f by Arun Thomas",null,B.z2,B.ck,null,null,null,null,null,null)
 B.SF=new A.o(!0,B.dn,null,null,null,null,12,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
-B.Tf=new A.bX("Nissaram allae ellam ;)",null,B.SF,B.ck,null,null,null,null,null,null)
+B.Tg=new A.bX("Nissaram allae ellam ;)",null,B.SF,B.ck,null,null,null,null,null,null)
 B.Th=new A.bX("Edit Event",null,null,null,null,null,null,null,null,null)
 B.Wh=new A.abQ(0,"system")
 B.KD=new A.f(0.05,0)
