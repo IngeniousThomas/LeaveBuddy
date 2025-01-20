@@ -205,8 +205,8 @@ class _LeavePageState extends State<LeavePage> {
               child: ElevatedButton.icon(
                 label: const Text('+  Add New Leave Type'),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.deepPurple, // Button background color
-                  foregroundColor: Colors.white,     // Text and icon color
+                  backgroundColor: Colors.white, // Button background color
+                  foregroundColor: Colors.deepPurpleAccent,     // Text and icon color
                   minimumSize: const Size(double.infinity, 48),
                 ),
                 onPressed: _showAddLeaveDialog,

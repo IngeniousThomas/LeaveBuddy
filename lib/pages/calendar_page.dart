@@ -14,7 +14,9 @@ class CalendarPage extends StatefulWidget {
 class _CalendarPageState extends State<CalendarPage> {
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
+  List<DateTime> _selectedDays = [];
   Map<DateTime, List<String>> _events = {};
+  bool _isSelectionMode = false;
 
   @override
   void initState() {
@@ -52,6 +54,16 @@ class _CalendarPageState extends State<CalendarPage> {
     return _events[day] ?? [];
   }
 
+  void _toggleDaySelection(DateTime day) {
+    setState(() {
+      if (_selectedDays.contains(day)) {
+        _selectedDays.remove(day);
+      } else {
+        _selectedDays.add(day);
+      }
+    });
+  }
+
   void _addEvent(String event) {
     if (_selectedDay != null) {
       setState(() {
@@ -59,6 +71,15 @@ class _CalendarPageState extends State<CalendarPage> {
       });
       _saveEvents();
     }
+  }
+
+  void _addEventToSelectedDays(String event) {
+    setState(() {
+      for (var day in _selectedDays) {
+        _events[day] = [...(_events[day] ?? []), event];
+      }
+    });
+    _saveEvents();
   }
 
   void _editEvent(String oldEvent, String newEvent) {
@@ -73,6 +94,27 @@ class _CalendarPageState extends State<CalendarPage> {
       });
       _saveEvents();
     }
+  }
+
+  void _bulkDeleteEvents() {
+    setState(() {
+      for (var day in _selectedDays) {
+        _events.remove(day);
+      }
+      _selectedDays.clear();
+    });
+    _saveEvents();
+  }
+
+  void _toggleSelectionMode() {
+    setState(() {
+      _isSelectionMode = !_isSelectionMode;
+      if (_isSelectionMode) {
+        _selectedDay = null; // Clear highlighted date when entering bulk mode
+      } else {
+        _selectedDays.clear(); // Clear bulk selection when leaving bulk mode
+      }
+    });
   }
 
   void _showDatePickerDialog() {
@@ -91,48 +133,57 @@ class _CalendarPageState extends State<CalendarPage> {
     });
   }
 
-  void _showAddEventDialog() {
+  void _showAddEventDialog({bool isBulk = false}) {
     final TextEditingController eventController = TextEditingController();
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text(_selectedDay != null 
-          ? 'Add Event for ${_selectedDay!.day}/${_selectedDay!.month}/${_selectedDay!.year}'
-          : 'Please select a date first'),
-        content: _selectedDay != null ? TextField(
-          controller: eventController,
-          decoration: const InputDecoration(
-            labelText: 'Event Description',
-            hintText: 'Enter event details',
-          ),
-          maxLines: 3,
-        ) : null,
-        actions: _selectedDay != null ? [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              if (eventController.text.isNotEmpty) {
-                _addEvent(eventController.text);
-                Navigator.pop(context);
-              }
-            },
-            child: const Text('Add'),
-          ),
-        ] : [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('OK'),
-          ),
-        ],
+        title: Text(isBulk
+            ? 'Add Event for Selected Days (${_selectedDays.length})'
+            : _selectedDay != null
+                ? 'Add Event for ${_selectedDay!.day}/${_selectedDay!.month}/${_selectedDay!.year}'
+                : 'Please select a date first'),
+        content: isBulk || _selectedDay != null
+            ? TextField(
+                controller: eventController,
+                decoration: const InputDecoration(
+                  labelText: 'Event Description',
+                ),
+              )
+            : null,
+        actions: isBulk || _selectedDay != null
+            ? [
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: const Text('Cancel'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    if (eventController.text.isNotEmpty) {
+                      if (isBulk) {
+                        _addEventToSelectedDays(eventController.text);
+                      } else {
+                        _addEvent(eventController.text);
+                      }
+                      Navigator.pop(context);
+                    }
+                  },
+                  child: const Text('Add'),
+                ),
+              ]
+            : [
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: const Text('OK'),
+                ),
+              ],
       ),
     );
   }
 
-  void _showEditEventDialog(String event) {
-    final TextEditingController eventController = TextEditingController(text: event);
+  void _showEditEventDialog(String oldEvent) {
+    final TextEditingController eventController =
+        TextEditingController(text: oldEvent);
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -140,10 +191,8 @@ class _CalendarPageState extends State<CalendarPage> {
         content: TextField(
           controller: eventController,
           decoration: const InputDecoration(
-            labelText: 'Event Description',
-            hintText: 'Enter event details',
+            labelText: 'Edit Event Description',
           ),
-          maxLines: 3,
         ),
         actions: [
           TextButton(
@@ -153,7 +202,7 @@ class _CalendarPageState extends State<CalendarPage> {
           ElevatedButton(
             onPressed: () {
               if (eventController.text.isNotEmpty) {
-                _editEvent(event, eventController.text);
+                _editEvent(oldEvent, eventController.text);
                 Navigator.pop(context);
               }
             },
@@ -169,7 +218,15 @@ class _CalendarPageState extends State<CalendarPage> {
     return Scaffold(
       drawer: const AppNavigationDrawer(),
       appBar: AppBar(
-        title: const Text('Calendar'),
+        title: Text(
+          'Calendar'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.calendar_today),
+            onPressed: _showDatePickerDialog,
+            tooltip: 'Jump to Date',
+          ),
+        ],
       ),
       body: Column(
         children: [
@@ -177,83 +234,149 @@ class _CalendarPageState extends State<CalendarPage> {
             firstDay: DateTime.utc(2020, 1, 1),
             lastDay: DateTime.utc(2030, 12, 31),
             focusedDay: _focusedDay,
-            calendarFormat: CalendarFormat.month, // Fixed to month view
-            availableCalendarFormats: const {
-              CalendarFormat.month: 'Month'
-            },
-            selectedDayPredicate: (day) {
-              return isSameDay(_selectedDay, day);
-            },
+            calendarFormat: CalendarFormat.month,
+            availableCalendarFormats: const {CalendarFormat.month: 'Month'},
+            selectedDayPredicate: (day) =>
+                (!_isSelectionMode && isSameDay(_selectedDay, day)) ||
+                (_isSelectionMode && _selectedDays.contains(day)),
             onDaySelected: (selectedDay, focusedDay) {
               setState(() {
-                _selectedDay = selectedDay;
+                if (_isSelectionMode) {
+                  _toggleDaySelection(selectedDay);
+                } else {
+                  _selectedDay = selectedDay;
+                }
                 _focusedDay = focusedDay;
               });
             },
             onPageChanged: (focusedDay) {
-              _focusedDay = focusedDay;
+              setState(() {
+                _focusedDay = focusedDay;
+              });
             },
             eventLoader: _getEventsForDay,
             headerStyle: HeaderStyle(
-              titleTextStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              formatButtonVisible: false,
               titleCentered: true,
-              leftChevronVisible: true,
-              rightChevronVisible: true,
-              titleTextFormatter: (date, locale) => 
-                '${date.month}/${date.year}',
+              titleTextStyle: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
             ),
-            onHeaderTapped: (_) => _showDatePickerDialog(),
+            calendarBuilders: CalendarBuilders(
+              dowBuilder: (context, day) {
+                if (day.weekday == DateTime.sunday) {
+                  return Center(
+                    child: Text(
+                      'Sun',
+                      style: TextStyle(color: Colors.red),
+                    ),
+                  );
+                }
+                return null;
+              },
+              defaultBuilder: (context, day, focusedDay) {
+                if (day.weekday == DateTime.sunday) {
+                  return Center(
+                    child: Text(
+                      '${day.day}',
+                      style: TextStyle(color: Colors.red),
+                    ),
+                  );
+                }
+                return null;
+              },
+            ),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: ElevatedButton.icon(
-              onPressed: _showAddEventDialog,
-              icon: const Icon(Icons.add),
-              label: const Text('Add Event'),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                  onPressed: _isSelectionMode
+                      ? () => _showAddEventDialog(isBulk: true)
+                      : null,
+                  child: const Icon(Icons.add),
+                ),
+                ElevatedButton.icon(
+                  onPressed: _toggleSelectionMode,
+                  icon: Icon(
+                    _isSelectionMode ? Icons.cancel : Icons.select_all,
+                  ),
+                  label: Text(
+                    _isSelectionMode ? 'Disable Bulk' : 'Enable Bulk',
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: _isSelectionMode ? _bulkDeleteEvents : null,
+                  child: const Icon(Icons.delete),
+                ),
+              ],
             ),
           ),
-          const Divider(),
           Expanded(
-            child: _selectedDay == null
-                ? const Center(
-                    child: Text('Select a day to view events'),
-                  )
-                : ListView(
-                    padding: const EdgeInsets.all(8),
-                    children: _getEventsForDay(_selectedDay!)
-                        .map((event) => Card(
-                              margin: const EdgeInsets.symmetric(
-                                vertical: 4,
-                                horizontal: 8,
-                              ),
-                              child: ListTile(
-                                title: Text(event),
-                                trailing: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    IconButton(
-                                      icon: const Icon(Icons.edit),
-                                      onPressed: () => _showEditEventDialog(event),
+            child: _isSelectionMode
+                ? _selectedDays.isEmpty
+                    ? const Center(
+                        child: Text('No days selected'),
+                      )
+                    : ListView(
+                        children: _selectedDays
+                            .expand((day) => _getEventsForDay(day)
+                                .map((event) => Card(
+                                      margin: const EdgeInsets.symmetric(
+                                        vertical: 4,
+                                        horizontal: 8,
+                                      ),
+                                      child: ListTile(
+                                        title: Text(
+                                            '$event (${day.day}/${day.month}/${day.year})'),
+                                      ),
+                                    )))
+                            .toList(),
+                      )
+                : _selectedDay == null
+                    ? const Center(
+                        child: Text('Select a day to view events'),
+                      )
+                    : ListView(
+                        children: _getEventsForDay(_selectedDay!)
+                            .map((event) => Card(
+                                  margin: const EdgeInsets.symmetric(
+                                    vertical: 4,
+                                    horizontal: 8,
+                                  ),
+                                  child: ListTile(
+                                    title: Text(event),
+                                    trailing: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        IconButton(
+                                          icon: const Icon(Icons.edit),
+                                          onPressed: () =>
+                                              _showEditEventDialog(event),
+                                        ),
+                                        IconButton(
+                                          icon: const Icon(Icons.delete),
+                                          onPressed: () {
+                                            setState(() {
+                                              _events[_selectedDay!]
+                                                  ?.remove(event);
+                                              if (_events[_selectedDay!]
+                                                      ?.isEmpty ??
+                                                  false) {
+                                                _events.remove(_selectedDay!);
+                                              }
+                                            });
+                                            _saveEvents();
+                                          },
+                                        ),
+                                      ],
                                     ),
-                                    IconButton(
-                                      icon: const Icon(Icons.delete),
-                                      onPressed: () {
-                                        setState(() {
-                                          _events[_selectedDay!]?.remove(event);
-                                          if (_events[_selectedDay!]?.isEmpty ?? false) {
-                                            _events.remove(_selectedDay!);
-                                          }
-                                        });
-                                        _saveEvents();
-                                      },
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ))
-                        .toList(),
-                  ),
+                                  ),
+                                ))
+                            .toList(),
+                      ),
           ),
           const Padding(
             padding: EdgeInsets.all(8.0),
@@ -264,7 +387,13 @@ class _CalendarPageState extends State<CalendarPage> {
           ),
         ],
       ),
+      floatingActionButton: _isSelectionMode
+          ? null
+          : FloatingActionButton(
+              onPressed: () => _showAddEventDialog(isBulk: false),
+              child: const Icon(Icons.add),
+              tooltip: 'Add Event',
+            ),
     );
-    
   }
 }
