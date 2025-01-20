@@ -79577,7 +79577,7 @@ s.aa(new A.ahg(s,this.b))},
 $S:0}
 A.ahg.prototype={
 $0(){var s=this.b,r=s.b
-if(r>=0.25){s.b=B.c.ap((r-0.25)*4)/4
+if(r>=0.25){s.b=B.c.ap((r-1)*4)/4
 this.a.hu()}},
 $S:0}
 A.ahl.prototype={
@@ -79589,7 +79589,7 @@ s.aa(new A.ahf(s,this.b))},
 $S:0}
 A.ahf.prototype={
 $0(){var s=this.b
-s.b=B.c.ap((s.b+0.25)*4)/4
+s.b=B.c.ap((s.b+0.5)*4)/4
 this.a.hu()},
 $S:0}
 A.ahe.prototype={

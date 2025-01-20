@@ -29303,7 +29303,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 --------------------------------------------------------------------------------
 leavebuddy
 
-<<<<<<< HEAD
 =======
 Copyright 2025 Arun Thomas, LeaveBuddy
 
@@ -29321,14 +29320,12 @@ limitations under the License.
 
 ------------------------------------------------------------------
 
->>>>>>> 7119137 (Initial commit with app files and LICENSE)
                                  Apache License
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/
 
    TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
 
-<<<<<<< HEAD
    1. Definitions.
 
       "License" shall mean the terms and conditions for use, reproduction,
@@ -29560,7 +29557,6 @@ limitations under the License.
 
 9. Governing Law.
    This License shall be governed by the laws of the jurisdiction in which the Licensor resides.
->>>>>>> 7119137 (Initial commit with app files and LICENSE)
 
 --------------------------------------------------------------------------------
 libXNVCtrl
