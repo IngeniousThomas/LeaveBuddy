@@ -4,10 +4,6 @@
 
 ### **Developer - Arun Thomas** 💡
 
-This is my first app and I'd like all suggestions and feedback you guys can think of, I'll implement them :)
-
-Reach out to me - Mail: arunthomas04042001@gmail.com / Telegram: https://t.me/@requaza 
-
 ---
 
 ## **Features**
