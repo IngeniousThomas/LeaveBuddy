@@ -161,7 +161,7 @@ class _LeavePageState extends State<LeavePage> {
                                       onPressed: () {
                                         setState(() {
                                           if (leave.count >= 0.25) {
-                                            leave.count = validateLeaveCount(leave.count - 0.25);
+                                            leave.count = validateLeaveCount(leave.count - 1);
                                             _saveLeaveData();
                                           }
                                         });
@@ -184,7 +184,7 @@ class _LeavePageState extends State<LeavePage> {
                                       icon: const Icon(Icons.add, color: Colors.white),
                                       onPressed: () {
                                         setState(() {
-                                          leave.count = validateLeaveCount(leave.count + 0.25);
+                                          leave.count = validateLeaveCount(leave.count + 0.5);
                                           _saveLeaveData();
                                         });
                                       },
