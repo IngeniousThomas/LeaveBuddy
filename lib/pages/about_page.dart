@@ -43,7 +43,7 @@ class AboutPage extends StatelessWidget {
 
               // description of Leave Buddy
               const Text(
-                'Leave Buddy helps you track and manage leaves. ',
+                'Your Personal Leave Management Tool',
                 style: TextStyle(
                   fontSize: 16,
                   color: Colors.grey,

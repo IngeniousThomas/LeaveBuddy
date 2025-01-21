@@ -304,7 +304,7 @@ class _CalendarPageState extends State<CalendarPage> {
                     _isSelectionMode ? Icons.cancel : Icons.select_all,
                   ),
                   label: Text(
-                    _isSelectionMode ? 'Disable Bulk' : 'Enable Bulk',
+                    _isSelectionMode ? ' Cancel' : 'Multiple',
                   ),
                 ),
                 ElevatedButton(
@@ -391,8 +391,8 @@ class _CalendarPageState extends State<CalendarPage> {
           ? null
           : FloatingActionButton(
               onPressed: () => _showAddEventDialog(isBulk: false),
-              child: const Icon(Icons.add),
               tooltip: 'Add Event',
+              child: const Icon(Icons.add),
             ),
     );
   }

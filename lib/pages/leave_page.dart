@@ -4,7 +4,7 @@ import '../models/leave_type.dart';
 import '../widgets/navigation_drawer.dart';
 
 class LeavePage extends StatefulWidget {
-  const LeavePage({Key? key}) : super(key: key);
+  const LeavePage({super.key});
 
   @override
   _LeavePageState createState() => _LeavePageState();
