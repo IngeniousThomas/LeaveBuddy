@@ -12,8 +12,6 @@
 .swiftpm/
 migrate_working_dir/
 
-android/app/build.gradle
-
 # IntelliJ related
 *.iml
 *.ipr
@@ -34,6 +32,8 @@ android/app/build.gradle
 .pub-cache/
 .pub/
 /build/
+!build/web/assets/splashbg.png
+!build/web/assets/splashtext.png
 
 # Symbolication related
 app.*.symbols
