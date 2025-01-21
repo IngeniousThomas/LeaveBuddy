@@ -79716,7 +79716,7 @@ return A.T(A.anu(a),$async$mK)
 case 5:case 3:return A.K(null,r)}})
 return A.L($async$mK,r)},
 H(a){var s=null,r=A.aof(s,s,B.z3),q=A.l5(12),p=t.p
-return A.a8w(r,A.aFT(new A.bq(B.fI,A.dX(A.b([new A.Gu(new A.l1("assets/icon/abouticon.png",s,s),60,s),B.eW,B.T5,B.Od,B.Tc,B.Oa,A.WN(new A.bq(B.fI,A.dX(A.b([B.Bz,B.yy,A.og(B.F8,new A.Vo(this),B.SX,B.T9,s),A.og(B.Ey,new A.Vp(this),B.Td,B.T8,s),A.og(B.Ez,new A.Vq(this),B.T4,B.Tb,s)],p),B.bu,B.K,B.ac),s),3,s,new A.co(q,B.l)),B.eW,B.Tf,B.Oc,B.Tg],p),B.W,B.K,B.ac),s)),B.ip,s)}}
+return A.a8w(r,A.aFT(new A.bq(B.fI,A.dX(A.b([new A.Gu(new A.l1("assets/icon/abouticon.png",s,s),60,s),B.eW,B.T5,B.Od,B.Td,B.Oa,A.WN(new A.bq(B.fI,A.dX(A.b([B.Bz,B.yy,A.og(B.F8,new A.Vo(this),B.SX,B.T9,s),A.og(B.Ey,new A.Vp(this),B.Tc,B.T8,s),A.og(B.Ez,new A.Vq(this),B.T4,B.Tb,s)],p),B.bu,B.K,B.ac),s),3,s,new A.co(q,B.l)),B.eW,B.Tf,B.Oc,B.Tg],p),B.W,B.K,B.ac),s)),B.ip,s)}}
 A.Vo.prototype={
 $0(){return this.a.mK("https://leavebuddy.vercel.app/")},
 $S:0}
@@ -79785,7 +79785,7 @@ o=Date.now()
 n=k.w
 m=A.nC(!1,B.n5,j,j,B.by,j,j,j,j,n?new A.aet(k):j,j,j)
 l=A.r2(n?B.ET:B.F1,j,j)
-l=A.asV(l,A.bE(n?"Disable Bulk":"Enable Bulk",j,j,j,j,j,j,j),k.gada(),j)
+l=A.asV(l,A.bE(n?" Cancel":"Multiple",j,j,j,j,j,j,j),k.gada(),j)
 m=A.f7(A.b([m,l,A.nC(!1,B.n4,j,j,B.by,j,j,j,j,n?k.ga0Y():j,j,j)],h),B.W,B.jI,B.ac)
 if(k.w){n=k.f
 if(n.length===0)n=B.Bx
@@ -87164,9 +87164,9 @@ B.T8=new A.bX("LinkedIn",null,null,null,null,null,null,null,null,null)
 B.T9=new A.bX("Website",null,null,null,null,null,null,null,null,null)
 B.Ta=new A.bX("Add New Leave Type",null,null,null,null,null,null,null,null,null)
 B.Tb=new A.bX("Github",null,null,null,null,null,null,null,null,null)
-B.Tc=new A.bX("Leave Buddy helps you track and manage leaves. ",null,B.z1,B.ck,null,null,null,null,null,null)
 B.f0=new A.bX("Cancel",null,null,null,null,null,null,null,null,null)
-B.Td=new A.bX("linkedin.com/in/arunthomas-hyd",null,null,null,null,null,null,null,null,null)
+B.Tc=new A.bX("linkedin.com/in/arunthomas-hyd",null,null,null,null,null,null,null,null,null)
+B.Td=new A.bX("Your Personal Leave Management Tool",null,B.z1,B.ck,null,null,null,null,null,null)
 B.Te=new A.bX("+  Add New Leave Type",null,null,null,null,null,null,null,null,null)
 B.Tf=new A.bX("Made with \u2764\ufe0f by Arun Thomas",null,B.z2,B.ck,null,null,null,null,null,null)
 B.SF=new A.o(!0,B.dn,null,null,null,null,12,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
