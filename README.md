@@ -26,8 +26,8 @@
 ![AboutPage](https://github.com/user-attachments/assets/1b6e0c72-156b-489b-b785-09cf3d3919ee)
 ![HomePage](https://github.com/user-attachments/assets/20ad9378-78ba-467b-8c7d-7613d4fc137d)
 ![HomeDelete](https://github.com/user-attachments/assets/44622112-0de7-4e05-8631-67c473dc8423)
-![CalendarPage](https://github.com/user-attachments/assets/4783b7d4-062a-47ab-96cf-826bdb773e6e)
-![BulkEdit](https://github.com/user-attachments/assets/eeacfbcf-9dbe-4628-bc89-4a23effa951b)
+![CalendarPage](https://github.com/user-attachments/assets/2065b810-12e3-48fd-bacb-5e3e023d6e57)
+![Multi](https://github.com/user-attachments/assets/c1acc5c0-a657-45ab-946b-bd57cfdd1cf4)
 
 ---
 
