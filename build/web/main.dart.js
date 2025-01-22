@@ -79676,7 +79676,7 @@ $1(a){return"fallback"},
 $S:95}
 A.IH.prototype={
 H(a){var s=null,r=A.tt(s,s,B.jM,B.lT,s)
-return new A.y7(A.ap(["/splash",new A.a2a(),"/calendar",new A.a2b(),"/about",new A.a2c(),"/leave",new A.a2d()],t.N,t.Ab),"/splash","Leave Buddy",r,s)}}
+return new A.y7(A.ap(["/splash",new A.a2a(),"/calendar",new A.a2b(),"/about",new A.a2c(),"/leave",new A.a2d()],t.N,t.Ab),"/leave","Leave Buddy",r,s)}}
 A.a2a.prototype={
 $1(a){return B.Ol},
 $S:498}

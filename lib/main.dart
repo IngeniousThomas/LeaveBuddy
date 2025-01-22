@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart'; // Import for kIsWeb
 import 'package:flutter/material.dart';
 import 'pages/about_page.dart';
 import 'pages/calendar_page.dart';
@@ -19,9 +20,10 @@ class LeaveBuddyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         scaffoldBackgroundColor: Colors.grey[100],
       ),
-      initialRoute: '/splash', // Start with the splash screen at app launch
+      // Check if running on web and set the initial route accordingly
+      initialRoute: kIsWeb ? '/leave' : '/splash',
       routes: {
-        '/splash': (context) => const SplashScreen(), // Splash screen route
+        '/splash': (context) => const SplashScreen(),
         '/calendar': (context) => const CalendarPage(),
         '/about': (context) => const AboutPage(),
         '/leave': (context) => const LeavePage(),
@@ -41,7 +43,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    // Navigate to LeavePage after 1 seconds
+    // Navigate to LeavePage after 1 second
     Timer(const Duration(seconds: 1), () {
       Navigator.pushReplacementNamed(context, '/leave');
     });
