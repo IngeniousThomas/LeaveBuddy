@@ -394,7 +394,8 @@ class _CalendarPageState extends State<CalendarPage> {
                 ),
                 ElevatedButton.icon(
                   onPressed: _toggleRangeSelection,
-                  icon: const Icon(Icons.select_all),
+                  icon: Icon( _isSelectingRange ? Icons.cancel : Icons.select_all,
+                  ),
                   label: Text(_isSelectingRange ? 'Cancel' : 'Range'),
                 ),
                 ElevatedButton(
