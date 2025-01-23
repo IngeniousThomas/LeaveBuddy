@@ -14,14 +14,31 @@ class CalendarPage extends StatefulWidget {
 class _CalendarPageState extends State<CalendarPage> {
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
-  List<DateTime> _selectedDays = [];
+  List<(DateTime, DateTime)> _selectedRanges = [];
+  DateTime? _tempRangeStart;
   Map<DateTime, List<String>> _events = {};
-  bool _isSelectionMode = false;
+  bool _isSelectingRange = false;
 
   @override
   void initState() {
     super.initState();
     _loadEvents();
+  }
+
+  void _showDatePickerDialog() {
+    showDatePicker(
+      context: context,
+      initialDate: _focusedDay,
+      firstDate: DateTime(2020),
+      lastDate: DateTime(2030),
+    ).then((date) {
+      if (date != null) {
+        setState(() {
+          _focusedDay = date;
+          _selectedDay = date;
+        });
+      }
+    });
   }
 
   Future<void> _loadEvents() async {
@@ -54,12 +71,42 @@ class _CalendarPageState extends State<CalendarPage> {
     return _events[day] ?? [];
   }
 
-  void _toggleDaySelection(DateTime day) {
+  bool _isDateInRanges(DateTime date) {
+    for (var range in _selectedRanges) {
+      if (date.isAtSameMomentAs(range.$1) || 
+          date.isAtSameMomentAs(range.$2) ||
+          (date.isAfter(range.$1) && date.isBefore(range.$2))) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  bool _isRangeStart(DateTime date) {
+    return _selectedRanges.any((range) => date.isAtSameMomentAs(range.$1));
+  }
+
+  bool _isRangeEnd(DateTime date) {
+    return _selectedRanges.any((range) => date.isAtSameMomentAs(range.$2));
+  }
+
+  bool _isRangeDuplicate(DateTime start, DateTime end) {
+    return _selectedRanges.any((range) =>
+        (start.isAtSameMomentAs(range.$1) && end.isAtSameMomentAs(range.$2)) ||
+        (start.isAtSameMomentAs(range.$2) && end.isAtSameMomentAs(range.$1)));
+  }
+
+  void _toggleRangeSelection() {
     setState(() {
-      if (_selectedDays.contains(day)) {
-        _selectedDays.remove(day);
+      _isSelectingRange = !_isSelectingRange;
+      if (!_isSelectingRange) {
+        _tempRangeStart = null;
+        _selectedDay = null;
       } else {
-        _selectedDays.add(day);
+        // Clear any existing ranges when entering range mode
+        _selectedRanges.clear();
+        _tempRangeStart = null;
+        _selectedDay = null;
       }
     });
   }
@@ -71,15 +118,6 @@ class _CalendarPageState extends State<CalendarPage> {
       });
       _saveEvents();
     }
-  }
-
-  void _addEventToSelectedDays(String event) {
-    setState(() {
-      for (var day in _selectedDays) {
-        _events[day] = [...(_events[day] ?? []), event];
-      }
-    });
-    _saveEvents();
   }
 
   void _editEvent(String oldEvent, String newEvent) {
@@ -96,94 +134,100 @@ class _CalendarPageState extends State<CalendarPage> {
     }
   }
 
-  void _bulkDeleteEvents() {
+  void _deleteEvent(DateTime day, String event) {
     setState(() {
-      for (var day in _selectedDays) {
+      _events[day]?.remove(event);
+      if (_events[day]?.isEmpty ?? false) {
         _events.remove(day);
       }
-      _selectedDays.clear();
     });
     _saveEvents();
   }
 
-  void _toggleSelectionMode() {
-    setState(() {
-      _isSelectionMode = !_isSelectionMode;
-      if (_isSelectionMode) {
-        _selectedDay = null; // Clear highlighted date when entering bulk mode
-      } else {
-        _selectedDays.clear(); // Clear bulk selection when leaving bulk mode
-      }
-    });
+  void _deleteEventsInRange((DateTime, DateTime) range) {
+    for (var day = range.$1;
+        day.isBefore(range.$2.add(const Duration(days: 1)));
+        day = day.add(const Duration(days: 1))) {
+      _events.remove(day);
+    }
+    _saveEvents();
   }
 
-  void _showDatePickerDialog() {
-    showDatePicker(
-      context: context,
-      initialDate: _focusedDay,
-      firstDate: DateTime(2020),
-      lastDate: DateTime(2030),
-    ).then((date) {
-      if (date != null) {
-        setState(() {
-          _focusedDay = date;
-          _selectedDay = date;
-        });
+  Map<String, (DateTime, DateTime, List<DateTime>)> _getGroupedRangeEvents(
+    (DateTime, DateTime) range
+  ) {
+    final Map<String, (DateTime, DateTime, List<DateTime>)> groupedEvents = {};
+    
+    for (var day = range.$1;
+         day.isBefore(range.$2.add(const Duration(days: 1)));
+         day = day.add(const Duration(days: 1))) {
+      final dayEvents = _events[day] ?? [];
+      for (final event in dayEvents) {
+        if (groupedEvents.containsKey(event)) {
+          var (start, end, dates) = groupedEvents[event]!;
+          dates.add(day);
+          if (day.isBefore(start)) start = day;
+          if (day.isAfter(end)) end = day;
+          groupedEvents[event] = (start, end, dates);
+        } else {
+          groupedEvents[event] = (day, day, [day]);
+        }
       }
-    });
+    }
+    
+    return groupedEvents;
   }
 
-  void _showAddEventDialog({bool isBulk = false}) {
+  void _showAddEventDialog({bool isRange = false}) {
     final TextEditingController eventController = TextEditingController();
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text(isBulk
-            ? 'Add Event for Selected Days (${_selectedDays.length})'
-            : _selectedDay != null
-                ? 'Add Event for ${_selectedDay!.day}/${_selectedDay!.month}/${_selectedDay!.year}'
-                : 'Please select a date first'),
-        content: isBulk || _selectedDay != null
-            ? TextField(
-                controller: eventController,
-                decoration: const InputDecoration(
-                  labelText: 'Event Description',
-                ),
-              )
-            : null,
-        actions: isBulk || _selectedDay != null
-            ? [
-                TextButton(
-                  onPressed: () => Navigator.pop(context),
-                  child: const Text('Cancel'),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    if (eventController.text.isNotEmpty) {
-                      if (isBulk) {
-                        _addEventToSelectedDays(eventController.text);
-                      } else {
-                        _addEvent(eventController.text);
-                      }
-                      Navigator.pop(context);
+        title: Text(
+          isRange
+              ? 'Add Event for Selected Ranges'
+              : 'Add Event for ${_selectedDay!.day}/${_selectedDay!.month}/${_selectedDay!.year}',
+        ),
+        content: TextField(
+          controller: eventController,
+          decoration: const InputDecoration(
+            labelText: 'Event Description',
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Cancel'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              if (eventController.text.isNotEmpty) {
+                if (isRange) {
+                  for (var range in _selectedRanges) {
+                    for (var day = range.$1;
+                        day.isBefore(range.$2.add(const Duration(days: 1)));
+                        day = day.add(const Duration(days: 1))) {
+                      setState(() {
+                        _events[day] = [...(_events[day] ?? []), eventController.text];
+                      });
                     }
-                  },
-                  child: const Text('Add'),
-                ),
-              ]
-            : [
-                TextButton(
-                  onPressed: () => Navigator.pop(context),
-                  child: const Text('OK'),
-                ),
-              ],
+                  }
+                } else {
+                  _addEvent(eventController.text);
+                }
+                _saveEvents();
+                Navigator.pop(context);
+              }
+            },
+            child: const Text('Add'),
+          ),
+        ],
       ),
     );
   }
 
   void _showEditEventDialog(String oldEvent) {
-    final TextEditingController eventController =
-        TextEditingController(text: oldEvent);
+    final TextEditingController eventController = TextEditingController(text: oldEvent);
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -218,13 +262,11 @@ class _CalendarPageState extends State<CalendarPage> {
     return Scaffold(
       drawer: const AppNavigationDrawer(),
       appBar: AppBar(
-        title: Text(
-          'Calendar'),
+        title: const Text('Calendar'),
         actions: [
           IconButton(
             icon: const Icon(Icons.calendar_today),
             onPressed: _showDatePickerDialog,
-            tooltip: 'Jump to Date',
           ),
         ],
       ),
@@ -236,13 +278,31 @@ class _CalendarPageState extends State<CalendarPage> {
             focusedDay: _focusedDay,
             calendarFormat: CalendarFormat.month,
             availableCalendarFormats: const {CalendarFormat.month: 'Month'},
-            selectedDayPredicate: (day) =>
-                (!_isSelectionMode && isSameDay(_selectedDay, day)) ||
-                (_isSelectionMode && _selectedDays.contains(day)),
+            selectedDayPredicate: (day) {
+              if (_isSelectingRange) {
+                return _isDateInRanges(day) || 
+                       (_tempRangeStart != null && day.isAtSameMomentAs(_tempRangeStart!));
+              }
+              return _selectedDay != null && isSameDay(_selectedDay, day);
+            },
             onDaySelected: (selectedDay, focusedDay) {
               setState(() {
-                if (_isSelectionMode) {
-                  _toggleDaySelection(selectedDay);
+                if (_isSelectingRange) {
+                  if (_tempRangeStart == null) {
+                    _tempRangeStart = selectedDay;
+                  } else {
+                    final rangeStart = _tempRangeStart!.isBefore(selectedDay) 
+                        ? _tempRangeStart! 
+                        : selectedDay;
+                    final rangeEnd = _tempRangeStart!.isBefore(selectedDay) 
+                        ? selectedDay 
+                        : _tempRangeStart!;
+                    
+                    if (!_isRangeDuplicate(rangeStart, rangeEnd)) {
+                      _selectedRanges.add((rangeStart, rangeEnd));
+                    }
+                    _tempRangeStart = null;
+                  }
                 } else {
                   _selectedDay = selectedDay;
                 }
@@ -255,20 +315,54 @@ class _CalendarPageState extends State<CalendarPage> {
               });
             },
             eventLoader: _getEventsForDay,
-            headerStyle: HeaderStyle(
+            headerStyle: const HeaderStyle(
               titleCentered: true,
+              formatButtonVisible: false,
               titleTextStyle: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
               ),
             ),
             calendarBuilders: CalendarBuilders(
+              selectedBuilder: (context, date, _) {
+                final isRangeStart = _isRangeStart(date);
+                final isRangeEnd = _isRangeEnd(date);
+                final isInRange = _isDateInRanges(date);
+                
+                return Container(
+                  margin: const EdgeInsets.all(4.0),
+                  decoration: BoxDecoration(
+                    color: isRangeEnd || (!_isSelectingRange && _selectedDay != null && isSameDay(_selectedDay, date))
+                        ? Theme.of(context).primaryColor
+                        : isInRange
+                            ? Theme.of(context).primaryColor.withOpacity(0.7)
+                            : null,
+                    border: Border.all(
+                      color: Theme.of(context).primaryColor,
+                      width: 2,
+                    ),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Center(
+                    child: Text(
+                      '${date.day}',
+                      style: TextStyle(
+                        color: isRangeEnd || (!_isSelectingRange && _selectedDay != null && isSameDay(_selectedDay, date))
+                            ? Colors.white
+                            : isInRange
+                                ? Colors.white
+                                : Theme.of(context).primaryColor,
+                      ),
+                    ),
+                  ),
+                );
+              },
               dowBuilder: (context, day) {
                 if (day.weekday == DateTime.sunday) {
                   return Center(
                     child: Text(
                       'Sun',
-                      style: TextStyle(color: Colors.red),
+                      style: const TextStyle(color: Colors.red),
                     ),
                   );
                 }
@@ -279,7 +373,7 @@ class _CalendarPageState extends State<CalendarPage> {
                   return Center(
                     child: Text(
                       '${day.day}',
-                      style: TextStyle(color: Colors.red),
+                      style: const TextStyle(color: Colors.red),
                     ),
                   );
                 }
@@ -293,51 +387,103 @@ class _CalendarPageState extends State<CalendarPage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ElevatedButton(
-                  onPressed: _isSelectionMode
-                      ? () => _showAddEventDialog(isBulk: true)
+                  onPressed: _isSelectingRange && _selectedRanges.isNotEmpty
+                      ? () => _showAddEventDialog(isRange: true)
                       : null,
                   child: const Icon(Icons.add),
                 ),
                 ElevatedButton.icon(
-                  onPressed: _toggleSelectionMode,
-                  icon: Icon(
-                    _isSelectionMode ? Icons.cancel : Icons.select_all,
-                  ),
-                  label: Text(
-                    _isSelectionMode ? ' Cancel' : 'Multiple',
-                  ),
+                  onPressed: _toggleRangeSelection,
+                  icon: const Icon(Icons.select_all),
+                  label: Text(_isSelectingRange ? 'Cancel' : 'Range'),
                 ),
                 ElevatedButton(
-                  onPressed: _isSelectionMode ? _bulkDeleteEvents : null,
+                  onPressed: _isSelectingRange && _selectedRanges.isNotEmpty
+                      ? () {
+                          setState(() {
+                            // Delete all events in all selected ranges
+                            for (var range in _selectedRanges) {
+                              _deleteEventsInRange(range);
+                            }
+                            _selectedRanges.clear();
+                          });
+                        }
+                      : null,
                   child: const Icon(Icons.delete),
                 ),
               ],
             ),
           ),
           Expanded(
-            child: _isSelectionMode
-                ? _selectedDays.isEmpty
-                    ? const Center(
-                        child: Text('No days selected'),
+            child: _isSelectingRange
+                ? (_selectedRanges.isEmpty
+                    ? Center(
+                        child: Text(
+                          _tempRangeStart != null
+                              ? 'Now select the end date'
+                              : 'Select the first date',
+                          style: const TextStyle(color: Colors.grey),
+                        ),
                       )
-                    : ListView(
-                        children: _selectedDays
-                            .expand((day) => _getEventsForDay(day)
-                                .map((event) => Card(
-                                      margin: const EdgeInsets.symmetric(
-                                        vertical: 4,
-                                        horizontal: 8,
-                                      ),
-                                      child: ListTile(
-                                        title: Text(
-                                            '$event (${day.day}/${day.month}/${day.year})'),
-                                      ),
-                                    )))
-                            .toList(),
-                      )
-                : _selectedDay == null
+                    : ListView.builder(
+                        itemCount: _selectedRanges.length,
+                        itemBuilder: (context, index) {
+                          final range = _selectedRanges[index];
+                          final groupedEvents = _getGroupedRangeEvents(range);
+                          
+                          return Card(
+                            margin: const EdgeInsets.symmetric(
+                              vertical: 4,
+                              horizontal: 8,
+                            ),
+                            child: ListTile(
+                              title: Text(
+                                'Range ${index + 1}: ${range.$1.day}/${range.$1.month} - ${range.$2.day}/${range.$2.month}',
+                              ),
+                              subtitle: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  ...groupedEvents.entries.map((entry) {
+                                    final eventName = entry.key;
+                                    final (start, end, dates) = entry.value;
+                                    
+                                    if (dates.length > 6) {
+                                      return Padding(
+                                        padding: const EdgeInsets.only(top: 4),
+                                        child: Text(
+                                          '$eventName (${start.day}/${start.month} - ${end.day}/${end.month})',
+                                        ),
+                                      );
+                                    } else {
+                                      return Padding(
+                                        padding: const EdgeInsets.only(top: 4),
+                                        child: Text(
+                                          dates.map((d) => '${d.day}/${d.month}').join(', ') +
+                                          ': $eventName',
+                                        ),
+                                      );
+                                    }
+                                  }),
+                                ],
+                              ),
+                              trailing: IconButton(
+                                icon: const Icon(Icons.close),
+                                onPressed: () {
+                                  setState(() {
+                                    _selectedRanges.removeAt(index);
+                                  });
+                                },
+                              ),
+                            ),
+                          );
+                        },
+                      ))
+                : (_selectedDay == null
                     ? const Center(
-                        child: Text('Select a day to view events'),
+                        child: Text(
+                          'Select a day to view events',
+                          style: TextStyle(color: Colors.grey),
+                        ),
                       )
                     : ListView(
                         children: _getEventsForDay(_selectedDay!)
@@ -353,30 +499,18 @@ class _CalendarPageState extends State<CalendarPage> {
                                       children: [
                                         IconButton(
                                           icon: const Icon(Icons.edit),
-                                          onPressed: () =>
-                                              _showEditEventDialog(event),
+                                          onPressed: () => _showEditEventDialog(event),
                                         ),
                                         IconButton(
                                           icon: const Icon(Icons.delete),
-                                          onPressed: () {
-                                            setState(() {
-                                              _events[_selectedDay!]
-                                                  ?.remove(event);
-                                              if (_events[_selectedDay!]
-                                                      ?.isEmpty ??
-                                                  false) {
-                                                _events.remove(_selectedDay!);
-                                              }
-                                            });
-                                            _saveEvents();
-                                          },
+                                          onPressed: () => _deleteEvent(_selectedDay!, event),
                                         ),
                                       ],
                                     ),
                                   ),
                                 ))
                             .toList(),
-                      ),
+                      )),
           ),
           const Padding(
             padding: EdgeInsets.all(8.0),
@@ -387,13 +521,15 @@ class _CalendarPageState extends State<CalendarPage> {
           ),
         ],
       ),
-      floatingActionButton: _isSelectionMode
-          ? null
-          : FloatingActionButton(
-              onPressed: () => _showAddEventDialog(isBulk: false),
+      floatingActionButton: !_isSelectingRange
+          ? FloatingActionButton(
+              onPressed: _selectedDay != null 
+                  ? () => _showAddEventDialog(isRange: false)
+                  : null,
               tooltip: 'Add Event',
               child: const Icon(Icons.add),
-            ),
+            )
+          : null,
     );
   }
 }
