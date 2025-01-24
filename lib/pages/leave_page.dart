@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/leave_type.dart';
 import '../widgets/navigation_drawer.dart';
+import '../widgets/footer.dart';
 
 class LeavePage extends StatefulWidget {
   const LeavePage({super.key});
@@ -18,14 +19,14 @@ class _LeavePageState extends State<LeavePage> {
   bool isModifying = false;
 
   final List<Color> leaveColors = [
-    const Color(0xFF4CAF50),
-    const Color(0xFF2196F3),
-    const Color(0xFF9C27B0),
-    const Color(0xFF00BCD4),
-    const Color(0xFF3F51B5),
-    const Color(0xFF009688),
-    const Color(0xFF673AB7),
-    const Color(0xFF03A9F4),
+    const Color(0xFF20C65F),
+    const Color(0xFF3C82F6),
+    const Color(0xFFA955F7),
+    const Color(0xFFF43F5F),
+    const Color(0xFFF69E0C),
+    const Color(0xFF13B8A6),
+    const Color(0xFF6366F1),
+    const Color(0xFFEC4899),
   ];
 
   @override
@@ -212,13 +213,7 @@ class _LeavePageState extends State<LeavePage> {
                 onPressed: _showAddLeaveDialog,
               ),
             ),
-          const Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Text(
-              'Made with ❤️ by Arun Thomas',
-              style: TextStyle(fontSize: 10, color: Colors.grey),
-            ),
-          ),
+          const Footer(),
         ],
       ),
     );

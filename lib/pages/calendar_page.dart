@@ -3,6 +3,7 @@ import '../widgets/navigation_drawer.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
+import '../widgets/footer.dart';
 
 class CalendarPage extends StatefulWidget {
   const CalendarPage({Key? key}) : super(key: key);
@@ -225,7 +226,6 @@ class _CalendarPageState extends State<CalendarPage> {
       ),
     );
   }
-
   void _showEditEventDialog(String oldEvent) {
     final TextEditingController eventController = TextEditingController(text: oldEvent);
     showDialog(
@@ -513,13 +513,7 @@ class _CalendarPageState extends State<CalendarPage> {
                             .toList(),
                       )),
           ),
-          const Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Text(
-              'Made with ❤️ by Arun Thomas',
-              style: TextStyle(fontSize: 10, color: Colors.grey),
-            ),
-          ),
+          const Footer(),
         ],
       ),
       floatingActionButton: !_isSelectingRange
