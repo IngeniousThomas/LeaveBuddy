@@ -1,10 +1,26 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.leavebuddy">
+
+    <queries>
+        <!-- Separate intent tags for each scheme -->
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.BROWSABLE" />
+            <data android:scheme="http" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.BROWSABLE" />
+            <data android:scheme="https" />
+        </intent>
+    </queries>
+
     <application
         android:label="leavebuddy"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon"
         android:theme="@style/LaunchTheme"> <!-- Ensure LaunchTheme is applied here -->
+        
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -20,6 +36,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
         <!-- Meta-data required for Flutter plugins -->
         <meta-data
             android:name="flutterEmbedding"
