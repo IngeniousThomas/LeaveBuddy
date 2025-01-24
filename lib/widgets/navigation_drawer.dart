@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppNavigationDrawer extends StatelessWidget {
-  const AppNavigationDrawer({Key? key}) : super(key: key);
+  const AppNavigationDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {

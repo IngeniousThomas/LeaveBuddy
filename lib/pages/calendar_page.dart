@@ -6,7 +6,7 @@ import 'dart:convert';
 import '../widgets/footer.dart';
 
 class CalendarPage extends StatefulWidget {
-  const CalendarPage({Key? key}) : super(key: key);
+  const CalendarPage({super.key});
 
   @override
   _CalendarPageState createState() => _CalendarPageState();
@@ -15,7 +15,7 @@ class CalendarPage extends StatefulWidget {
 class _CalendarPageState extends State<CalendarPage> {
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
-  List<(DateTime, DateTime)> _selectedRanges = [];
+  final List<(DateTime, DateTime)> _selectedRanges = [];
   DateTime? _tempRangeStart;
   Map<DateTime, List<String>> _events = {};
   bool _isSelectingRange = false;
@@ -30,7 +30,7 @@ class _CalendarPageState extends State<CalendarPage> {
     showDatePicker(
       context: context,
       initialDate: _focusedDay,
-      firstDate: DateTime(2020),
+      firstDate: DateTime(2022),
       lastDate: DateTime(2030),
     ).then((date) {
       if (date != null) {
@@ -273,7 +273,7 @@ class _CalendarPageState extends State<CalendarPage> {
       body: Column(
         children: [
           TableCalendar(
-            firstDay: DateTime.utc(2020, 1, 1),
+            firstDay: DateTime.utc(2022, 10, 31),
             lastDay: DateTime.utc(2030, 12, 31),
             focusedDay: _focusedDay,
             calendarFormat: CalendarFormat.month,
@@ -325,6 +325,7 @@ class _CalendarPageState extends State<CalendarPage> {
             ),
             calendarBuilders: CalendarBuilders(
               selectedBuilder: (context, date, _) {
+                // ignore: unused_local_variable
                 final isRangeStart = _isRangeStart(date);
                 final isRangeEnd = _isRangeEnd(date);
                 final isInRange = _isDateInRanges(date);
@@ -459,8 +460,7 @@ class _CalendarPageState extends State<CalendarPage> {
                                       return Padding(
                                         padding: const EdgeInsets.only(top: 4),
                                         child: Text(
-                                          dates.map((d) => '${d.day}/${d.month}').join(', ') +
-                                          ': $eventName',
+                                          '${dates.map((d) => '${d.day}/${d.month}').join(', ')}: $eventName',
                                         ),
                                       );
                                     }
