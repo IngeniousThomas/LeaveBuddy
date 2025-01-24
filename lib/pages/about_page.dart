@@ -85,7 +85,7 @@ class AboutPage extends StatelessWidget {
                         ListTile(
                           leading: const FaIcon(FontAwesomeIcons.github, color: Colors.deepPurple),
                           title: const Text('Github'),
-                          subtitle: const Text('github.com/IngeniousThomas/LeaveBuddy - for App Updates'),
+                          subtitle: const Text('github.com/IngeniousThomas/LeaveBuddy - For Updates'),
                           onTap: () => _launchURL('https://github.com/IngeniousThomas/LeaveBuddy.git'),
                         ),
                       ],

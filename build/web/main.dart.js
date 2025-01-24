@@ -79791,7 +79791,7 @@ return A.U(A.anD(a),$async$mK)
 case 5:case 3:return A.L(null,r)}})
 return A.M($async$mK,r)},
 H(a){var s=null,r=t.p
-return A.a8z(A.aoo(s,s,B.z9),A.dP(s,A.aG4(new A.bk(B.fJ,A.dO(A.b([new A.Gw(new A.l1("assets/icon/abouticon.png",s,s),60,s),B.eW,B.T8,B.Ol,B.Tg,B.Oi,new A.I7(new A.bk(B.fJ,A.dO(A.b([B.BE,B.yB,A.of(B.Ff,new A.Vs(this),B.T3,B.Tc,s),A.of(B.EF,new A.Vt(this),B.Tf,B.Tb,s),A.of(B.EG,new A.Vu(this),B.T7,B.Te,s)],r),B.bl,B.H,B.a7),s),s),B.eW,B.Ti,B.Ok,B.Tk],r),B.W,B.H,B.a7),s)),B.p,s,s,new A.bP(s,s,s,s,s,s,B.ac),s,s,s,s,s,s,s),B.ir,s)}}
+return A.a8z(A.aoo(s,s,B.z9),A.dP(s,A.aG4(new A.bk(B.fJ,A.dO(A.b([new A.Gw(new A.l1("assets/icon/abouticon.png",s,s),60,s),B.eW,B.T8,B.Ol,B.Tg,B.Oi,new A.I7(new A.bk(B.fJ,A.dO(A.b([B.BE,B.yB,A.of(B.Ff,new A.Vs(this),B.T3,B.Tc,s),A.of(B.EF,new A.Vt(this),B.Tf,B.Tb,s),A.of(B.EG,new A.Vu(this),B.T5,B.Te,s)],r),B.bl,B.H,B.a7),s),s),B.eW,B.Ti,B.Ok,B.Tk],r),B.W,B.H,B.a7),s)),B.p,s,s,new A.bP(s,s,s,s,s,s,B.ac),s,s,s,s,s,s,s),B.ir,s)}}
 A.Vs.prototype={
 $0(){return this.a.mK("https://leavebuddy.vercel.app/")},
 $S:0}
@@ -80323,7 +80323,7 @@ r.push(new A.lx(s.e.a.a,B.c.aq(this.b*4)/4,s.x[B.e.aI(r.length,8)]))},
 $S:0}
 A.ahN.prototype={
 $1(a){var s=null,r=this.a,q=A.tr(!0,B.bn,!1,s,!0,B.E,s,A.Fq(),r.e,s,s,s,s,s,2,B.ne,B.J,!0,s,!0,s,!1,s,B.br,s,s,s,s,s,s,s,1,s,s,!1,"\u2022",s,s,s,s,s,!1,s,!1,s,!0,s,B.cy,s,s,B.bi,B.b8,s,s,s,s,s,s,s,B.ah,s,B.cT,s,s,s,s)
-return A.FR(A.b([A.me(B.f0,new A.ahL(a),s),A.nB(!1,B.kI,s,s,B.bz,s,s,s,s,new A.ahM(r,this.b,a),s,s)],t.p),q,B.T6)},
+return A.FR(A.b([A.me(B.f0,new A.ahL(a),s),A.nB(!1,B.kI,s,s,B.bz,s,s,s,s,new A.ahM(r,this.b,a),s,s)],t.p),q,B.T7)},
 $S:63}
 A.ahL.prototype={
 $0(){A.e2(this.a,!1).hV(null)
@@ -84991,8 +84991,8 @@ B.m4=new A.r(1,0.12941176470588237,0.12941176470588237,0.12941176470588237,B.f)
 B.Jz=new A.c2([50,B.iL,100,B.lV,200,B.D7,300,B.lW,350,B.d9,400,B.CZ,500,B.m1,600,B.e2,700,B.da,800,B.c9,850,B.iO,900,B.m4],t.pl)
 B.hj=new A.ol(B.Jz,1,0.6196078431372549,0.6196078431372549,0.6196078431372549,B.f)
 B.z6=new A.n(!0,B.hj,null,null,null,null,16,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
-B.T5=new A.c4("No leave types added yet",null,B.z6,null,null,null,null,null,null,null)
-B.BD=new A.ev(B.w,null,null,B.T5,null)
+B.T6=new A.c4("No leave types added yet",null,B.z6,null,null,null,null,null,null,null)
+B.BD=new A.ev(B.w,null,null,B.T6,null)
 B.dj=new A.ha(6)
 B.z4=new A.n(!0,null,null,null,null,null,20,B.dj,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
 B.T1=new A.c4("Contact",null,B.z4,null,null,null,null,null,null,null)
@@ -87322,9 +87322,9 @@ B.z9=new A.c4("About",null,null,null,null,null,null,null,null,null)
 B.T2=new A.c4("Leave Buddy",null,null,null,null,null,null,null,null,null)
 B.T3=new A.c4("leavebuddy.vercel.app",null,null,null,null,null,null,null,null,null)
 B.kI=new A.c4("Save",null,null,null,null,null,null,null,null,null)
+B.T5=new A.c4("github.com/IngeniousThomas/LeaveBuddy - For Updates",null,null,null,null,null,null,null,null,null)
 B.za=new A.c4("Calendar",null,null,null,null,null,null,null,null,null)
-B.T6=new A.c4("Edit Leave Type Name",null,null,null,null,null,null,null,null,null)
-B.T7=new A.c4("github.com/IngeniousThomas/LeaveBuddy - for App Updates",null,null,null,null,null,null,null,null,null)
+B.T7=new A.c4("Edit Leave Type Name",null,null,null,null,null,null,null,null,null)
 B.Ra=new A.n(!0,null,null,null,null,null,24,B.dj,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
 B.T8=new A.c4("What is Leave Buddy?",null,B.Ra,null,null,null,null,null,null,null)
 B.T9=new A.c4("Leaves",null,null,null,null,null,null,null,null,null)
