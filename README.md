@@ -14,8 +14,8 @@
 - **Leave Page**: Add in your Leave Balances in this page and track it easily. 
 - **Calendar Page**: You can use the calendar to add in the days you've taken/planning to take a leave so you can keep a track of them, with option to add/delete multiple events.  
 - **About Page**: Use this page to track updates/changes. 
-- **Navigation Drawer Menu**: Provides Easy Access to all the pages and displays LeaveBuddy app version info. 
-- **Dark Mode**: A beautifully animated Light and Dark Mode toggle in the About Page to suit your preferences.
+- **Navigation Menu**: Provides Easy Access to all the pages and displays LeaveBuddy app version info. 
+- **Dark Mode**: A beautifully animated Light and Dark Mode toggle in the Navigation Menu Page to suit your preferences.
 
 ---
 

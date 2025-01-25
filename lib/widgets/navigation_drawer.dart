@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../theme/theme_provider.dart';
+import '../widgets/theme_toggle.dart';
+
 
 class AppNavigationDrawer extends StatelessWidget {
   const AppNavigationDrawer({super.key});
@@ -89,6 +91,8 @@ class AppNavigationDrawer extends StatelessWidget {
                     ],
                   ),
                 ),
+                const SizedBox(height: 24),
+                const ThemeToggle(),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(

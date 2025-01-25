@@ -80399,7 +80399,7 @@ return A.T(A.aoN(a),$async$mL)
 case 5:case 3:return A.K(null,r)}})
 return A.L($async$mL,r)},
 H(a){var s=null,r=t.p
-return A.a9q(A.apA(s,s,B.TR),A.dn(s,A.aHt(new A.bh(B.fL,A.dU(A.b([new A.H_(new A.l9("assets/icon/abouticon.png",s,s),60,s),B.hQ,B.TY,B.On,B.U2,B.kE,new A.Iz(new A.bh(B.fL,A.dU(A.b([B.BE,B.yI,A.oz(B.Fm,new A.W5(this),B.TT,B.U_,s),A.oz(B.EN,new A.W6(this),B.U1,B.TZ,s),A.oz(B.EO,new A.W7(this),B.TU,B.U0,s)],r),B.bo,B.J,B.ac),s),s),B.kE,B.U3,B.Om,B.U4,B.kE,B.U6],r),B.Z,B.J,B.ac),s)),B.r,s,s,new A.bM(s,s,s,s,s,s,B.ai),s,s,s,s,s,s,s),B.iu,s)}}
+return A.a9q(A.apA(s,s,B.TR),A.dn(s,A.aHt(new A.bh(B.fL,A.dU(A.b([new A.H_(new A.l9("assets/icon/abouticon.png",s,s),60,s),B.hQ,B.TY,B.On,B.U2,B.kE,new A.Iz(new A.bh(B.fL,A.dU(A.b([B.BE,B.yI,A.oz(B.Fm,new A.W5(this),B.TT,B.U_,s),A.oz(B.EN,new A.W6(this),B.U1,B.TZ,s),A.oz(B.EO,new A.W7(this),B.TU,B.U0,s)],r),B.bo,B.J,B.ac),s),s),B.kE,B.U3,B.Om,B.U4],r),B.Z,B.J,B.ac),s)),B.r,s,s,new A.bM(s,s,s,s,s,s,B.ai),s,s,s,s,s,s,s),B.iu,s)}}
 A.W5.prototype={
 $0(){return this.a.mL("https://leavebuddy.vercel.app/")},
 $S:0}
@@ -81005,7 +81005,7 @@ q=A.oz(A.hR(B.Fa,r?B.a9:B.P,n,n),new A.WC(a),n,A.bp("Leaves",n,n,n,n,n,n,n),n)
 p=A.oz(A.hR(B.n8,r?B.a9:B.P,n,n),new A.WD(a),n,A.bp("Calendar",n,n,n,n,n,n,n),n)
 o=t.p
 p=A.fB(A.avb(A.b([q,p,A.oz(A.hR(B.F8,r?B.a9:B.P,n,n),new A.WE(a),n,A.bp("About",n,n,n,n,n,n,n),n)],o),B.a8),1,n)
-return new A.mD(m,new A.I0(A.dU(A.b([s,p,new A.bh(B.fM,A.bp("V 1.3.0",n,n,n,A.cT(n,n,b.a?B.dh:B.by,n,n,n,n,n,n,n,n,14,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),B.c3,n,n),n)],o),B.Z,B.J,B.ac),n),n)},
+return new A.mD(m,new A.I0(A.dU(A.b([s,p,B.kE,B.U6,new A.bh(B.fM,A.bp("V 1.3.0",n,n,n,A.cT(n,n,b.a?B.dh:B.by,n,n,n,n,n,n,n,n,14,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),B.c3,n,n),n)],o),B.Z,B.J,B.ac),n),n)},
 $S:529}
 A.WC.prototype={
 $0(){var s=t.X

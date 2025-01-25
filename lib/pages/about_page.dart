@@ -3,8 +3,6 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../widgets/navigation_drawer.dart';
 import '../widgets/frosted_card.dart';
-import '../widgets/theme_toggle.dart';
-
 class AboutPage extends StatelessWidget {
   const AboutPage({super.key});
 
@@ -101,8 +99,7 @@ class AboutPage extends StatelessWidget {
                   style: TextStyle(fontSize: 12, color: Colors.deepPurple),
                   textAlign: TextAlign.center,
                 ),
-                const SizedBox(height: 24),
-                const ThemeToggle(),
+
               ],
             ),
           ),
