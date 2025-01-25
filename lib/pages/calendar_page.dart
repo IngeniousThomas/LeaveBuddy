@@ -591,7 +591,7 @@ class _CalendarPageState extends State<CalendarPage> {
                       ? Colors.deepPurpleAccent
                       : Colors.deepPurple,
                   tooltip: 'Add Event',
-                  child: const Icon(Icons.add),
+                  child: const Icon(Icons.add, color: Colors.white),
                 )
               : null,
         );

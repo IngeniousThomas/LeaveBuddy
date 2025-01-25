@@ -15,6 +15,7 @@
 - **Calendar Page**: You can use the calendar to add in the days you've taken/planning to take a leave so you can keep a track of them, with option to add/delete multiple events.  
 - **About Page**: Use this page to track updates/changes. 
 - **Navigation Drawer Menu**: Provides Easy Access to all the pages and displays LeaveBuddy app version info. 
+- **Dark Mode**: A beautifully animated Light and Dark Mode toggle in the About Page to suit your preferences.
 
 ---
 
@@ -22,12 +23,6 @@
 
 ![Logo](https://github.com/user-attachments/assets/6e3adfe9-1ca4-4491-9edf-71faddfb59d0)
 ![SplashScreen](https://github.com/user-attachments/assets/43c002be-35a5-4a29-93bc-41a624ce88a3)
-![NavigationPage](https://github.com/user-attachments/assets/54aef5cf-70b6-4be5-91ab-96ed26a5ed2e)
-![AboutPage](https://github.com/user-attachments/assets/1b6e0c72-156b-489b-b785-09cf3d3919ee)
-![HomePage](https://github.com/user-attachments/assets/20ad9378-78ba-467b-8c7d-7613d4fc137d)
-![HomeDelete](https://github.com/user-attachments/assets/44622112-0de7-4e05-8631-67c473dc8423)
-![CalendarPage](https://github.com/user-attachments/assets/2065b810-12e3-48fd-bacb-5e3e023d6e57)
-![Multi](https://github.com/user-attachments/assets/c1acc5c0-a657-45ab-946b-bd57cfdd1cf4)
 
 ---
 
