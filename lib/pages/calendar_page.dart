@@ -346,9 +346,16 @@ class _CalendarPageState extends State<CalendarPage> {
                         ? Colors.grey[600]
                         : Colors.grey[400],
                   ),
+                  markersMaxCount: 4, // Limit dots per day
+                  markersAlignment: Alignment.bottomCenter, // Align dots at the bottom
+                  markerDecoration: BoxDecoration(
+                      color: themeProvider.isDarkMode ? Colors.white : Colors.black, // Dynamic color for markers
+                      shape: BoxShape.circle,
+                    ),
                 ),
                 calendarBuilders: CalendarBuilders(
                   selectedBuilder: (context, date, _) {
+                    // ignore: unused_local_variable
                     final isRangeStart = _isRangeStart(date);
                     final isRangeEnd = _isRangeEnd(date);
                     final isInRange = _isDateInRanges(date);
