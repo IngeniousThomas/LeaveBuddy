@@ -454,10 +454,16 @@ class _CalendarPageState extends State<CalendarPage> {
                         backgroundColor: themeProvider.isDarkMode
                             ? const Color(0xFFF5F5F5)
                             : const Color(0xFFF5F5F5),
-                        foregroundColor: Colors.deepPurple,
-                      ),
-                      icon: Icon(_isSelectingRange ? Icons.cancel : Icons.select_all),
-                      label: Text(_isSelectingRange ? 'Cancel' : 'Range'),
+                          foregroundColor: Colors.deepPurple, // Text and icon color for default state
+                            ),
+                            icon: Icon(
+                              _isSelectingRange ? Icons.cancel : Icons.select_all,
+                              color: _isSelectingRange ? Colors.deepPurple : Colors.deepPurple, // Change icon color dynamically
+                            ),
+                            label: Text(
+                              _isSelectingRange ? 'Cancel' : 'Range',
+                              style: const TextStyle(color: Colors.deepPurple), // Ensure text color matches
+                            ),
                     ),
                     ElevatedButton(
                       onPressed: _isSelectingRange && _selectedRanges.isNotEmpty
