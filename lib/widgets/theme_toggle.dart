@@ -31,9 +31,8 @@ class ThemeToggle extends StatelessWidget {
             child: Stack(
               children: [
                 // Sun icon
-                AnimatedPositioned(
-                  duration: const Duration(milliseconds: 300),
-                  left: themeProvider.isDarkMode ? -30 : 12,
+                Positioned(
+                  right: themeProvider.isDarkMode ? -30 : 47,
                   top: 10,
                   child: Icon(
                     Icons.light_mode,
@@ -47,8 +46,7 @@ class ThemeToggle extends StatelessWidget {
                   ),
                 ),
                 // Moon icon
-                AnimatedPositioned(
-                  duration: const Duration(milliseconds: 300),
+                Positioned(
                   left: themeProvider.isDarkMode ? 47 : -30,
                   top: 10,
                   child: Icon(
@@ -59,7 +57,7 @@ class ThemeToggle extends StatelessWidget {
                     onPlay: (controller) => controller.repeat(),
                   ).shimmer(
                     duration: 2.seconds,
-                    color: const Color.fromARGB(255, 0, 40, 171).withOpacity(0.9),
+                    color: const Color(0xFF0028AB).withOpacity(0.9),
                   ),
                 ),
                 // Animated thumb
