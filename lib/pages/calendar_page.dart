@@ -368,7 +368,7 @@ class _CalendarPageState extends State<CalendarPage> {
                                     _selectedDay != null &&
                                     isSameDay(_selectedDay, date))
                             ? (themeProvider.isDarkMode
-                                ? Colors.deepPurpleAccent
+                                ? Colors.deepPurple
                                 : Colors.deepPurple)
                             : isInRange
                                 ? (themeProvider.isDarkMode
@@ -379,7 +379,7 @@ class _CalendarPageState extends State<CalendarPage> {
                         border: Border.all(
                           color: themeProvider.isDarkMode
                               ? Colors.deepPurpleAccent
-                              : Colors.deepPurple,
+                              : Colors.deepPurpleAccent,
                           width: 2,
                         ),
                         shape: BoxShape.circle,
