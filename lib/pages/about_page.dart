@@ -3,6 +3,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../widgets/navigation_drawer.dart';
 import '../widgets/frosted_card.dart';
+import '../widgets/theme_toggle.dart';
 
 class AboutPage extends StatelessWidget {
   const AboutPage({super.key});
@@ -21,8 +22,7 @@ class AboutPage extends StatelessWidget {
         title: const Text('About'),
       ),
       body: Container(
-        decoration: BoxDecoration(
-        ),
+        decoration: BoxDecoration(),
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
@@ -34,7 +34,6 @@ class AboutPage extends StatelessWidget {
                   backgroundImage: AssetImage('assets/icon/abouticon.png'),
                 ),
                 const SizedBox(height: 16),
-
                 const Text(
                   'What is Leave Buddy?',
                   style: TextStyle(
@@ -43,7 +42,6 @@ class AboutPage extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 8),
-
                 const Text(
                   'Your Personal Leave Management Tool',
                   style: TextStyle(
@@ -53,7 +51,6 @@ class AboutPage extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 24),
-
                 FrostedCard(
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
@@ -92,8 +89,7 @@ class AboutPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: 16),
-                
+                const SizedBox(height: 24),
                 const Text(
                   'Made with ❤️ by Arun Thomas',
                   style: TextStyle(fontSize: 14, color: Colors.grey),
@@ -105,6 +101,8 @@ class AboutPage extends StatelessWidget {
                   style: TextStyle(fontSize: 12, color: Colors.deepPurple),
                   textAlign: TextAlign.center,
                 ),
+                const SizedBox(height: 24),
+                const ThemeToggle(),
               ],
             ),
           ),

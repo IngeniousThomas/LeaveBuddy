@@ -1,75 +1,112 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../theme/theme_provider.dart';
 
 class AppNavigationDrawer extends StatelessWidget {
   const AppNavigationDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Drawer(
-      child: Column(
-        children: [
-          // Drawer Header
-          DrawerHeader(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/bg.png'), // Custom background image
-                fit: BoxFit.cover,
-              ),
-            ),
-            child: Center(
-              child: FittedBox(
-                fit: BoxFit.contain,
-                child: Image.asset(
-                  'assets/text.png', // Custom text/icon logo
-                ),
+    return Consumer<ThemeProvider>(
+      builder: (context, themeProvider, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            drawerTheme: DrawerThemeData(
+              elevation: 0,
+              backgroundColor: themeProvider.isDarkMode ? Colors.black : Colors.white,
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.zero,
               ),
             ),
           ),
-
-          // Drawer Items
-          Expanded(
-            child: ListView(
-              padding: EdgeInsets.zero,
+          child: Drawer(
+            child: Column(
               children: [
-                ListTile(
-                  leading: const Icon(Icons.list_alt),
-                  title: const Text('Leaves'),
-                  onTap: () {
-                    Navigator.pushReplacementNamed(context, '/leave');
-                  },
+                Container(
+                  height: 200, // Standard DrawerHeader height
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/bg.png'),
+                      fit: BoxFit.cover,
+                      colorFilter: ColorFilter.mode(
+                        themeProvider.isDarkMode
+                            ? Colors.black.withOpacity(0.6)
+                            : Colors.white.withOpacity(0.6),
+                        BlendMode.overlay,
+                      ),
+                    ),
+                  ),
+                  child: Center(
+                    child: FittedBox(
+                      fit: BoxFit.contain,
+                      child: Image.asset(
+                        'assets/text.png',
+                        color: themeProvider.isDarkMode ? Colors.white : null,
+                      ),
+                    ),
+                  ),
                 ),
-                ListTile(
-                  leading: const Icon(Icons.calendar_today),
-                  title: const Text('Calendar'),
-                  onTap: () {
-                    Navigator.pushReplacementNamed(context, '/calendar');
-                  },
+                Expanded(
+                  child: ListView(
+                    padding: EdgeInsets.zero,
+                    children: [
+                      ListTile(
+                        leading: Icon(
+                          Icons.list_alt,
+                          color: themeProvider.isDarkMode
+                              ? Colors.deepPurpleAccent
+                              : Colors.deepPurple,
+                        ),
+                        title: Text('Leaves'),
+                        onTap: () {
+                          Navigator.pushReplacementNamed(context, '/leave');
+                        },
+                      ),
+                      ListTile(
+                        leading: Icon(
+                          Icons.calendar_today,
+                          color: themeProvider.isDarkMode
+                              ? Colors.deepPurpleAccent
+                              : Colors.deepPurple,
+                        ),
+                        title: Text('Calendar'),
+                        onTap: () {
+                          Navigator.pushReplacementNamed(context, '/calendar');
+                        },
+                      ),
+                      ListTile(
+                        leading: Icon(
+                          Icons.info,
+                          color: themeProvider.isDarkMode
+                              ? Colors.deepPurpleAccent
+                              : Colors.deepPurple,
+                        ),
+                        title: Text('About'),
+                        onTap: () {
+                          Navigator.pushReplacementNamed(context, '/about');
+                        },
+                      ),
+                    ],
+                  ),
                 ),
-                ListTile(
-                  leading: const Icon(Icons.info),
-                  title: const Text('About'),
-                  onTap: () {
-                    Navigator.pushReplacementNamed(context, '/about');
-                  },
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'V 1.3.0',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: themeProvider.isDarkMode
+                          ? Colors.grey[400]
+                          : Colors.grey[600],
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
               ],
             ),
           ),
-
-          // Version Info at the Bottom
-          const Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Text(
-              'V 1.2.0',
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.grey,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

@@ -1,12 +1,19 @@
-import 'package:flutter/foundation.dart'; // Import for kIsWeb
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'theme/theme_provider.dart';
 import 'pages/about_page.dart';
 import 'pages/calendar_page.dart';
 import 'pages/leave_page.dart';
 import 'dart:async';
 
 void main() {
-  runApp(const LeaveBuddyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => ThemeProvider(),
+      child: const LeaveBuddyApp(),
+    ),
+  );
 }
 
 class LeaveBuddyApp extends StatelessWidget {
@@ -14,19 +21,19 @@ class LeaveBuddyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Leave Buddy',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        scaffoldBackgroundColor: Colors.grey[100],
-      ),
-      // Check if running on web and set the initial route accordingly
-      initialRoute: kIsWeb ? '/leave' : '/splash',
-      routes: {
-        '/splash': (context) => const SplashScreen(),
-        '/calendar': (context) => const CalendarPage(),
-        '/about': (context) => const AboutPage(),
-        '/leave': (context) => const LeavePage(),
+    return Consumer<ThemeProvider>(
+      builder: (context, themeProvider, child) {
+        return MaterialApp(
+          title: 'Leave Buddy',
+          theme: themeProvider.theme,
+          initialRoute: kIsWeb ? '/leave' : '/splash',
+          routes: {
+            '/splash': (context) => const SplashScreen(),
+            '/calendar': (context) => const CalendarPage(),
+            '/about': (context) => const AboutPage(),
+            '/leave': (context) => const LeavePage(),
+          },
+        );
       },
     );
   }
@@ -43,7 +50,6 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    // Navigate to LeavePage after 1 second
     Timer(const Duration(seconds: 1), () {
       Navigator.pushReplacementNamed(context, '/leave');
     });
@@ -51,28 +57,37 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          // Background image
-          Container(
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/splashbg.png'),
-                fit: BoxFit.cover,
+    return Consumer<ThemeProvider>(
+      builder: (context, themeProvider, child) {
+        return Scaffold(
+          body: Stack(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('assets/splashbg.png'),
+                    fit: BoxFit.cover,
+                    colorFilter: ColorFilter.mode(
+                      themeProvider.isDarkMode
+                          ? Colors.black.withOpacity(0.6)
+                          : Colors.white.withOpacity(0.6),
+                      BlendMode.overlay,
+                    ),
+                  ),
+                ),
               ),
-            ),
+              Center(
+                child: Image.asset(
+                  'assets/splashtext.png',
+                  width: MediaQuery.of(context).size.width * 0.7,
+                  fit: BoxFit.contain,
+                  color: themeProvider.isDarkMode ? Colors.white : null,
+                ),
+              ),
+            ],
           ),
-          // Logo and text centered
-          Center(
-            child: Image.asset(
-              'assets/splashtext.png',
-              width: MediaQuery.of(context).size.width * 0.7, // Scale based on screen width
-              fit: BoxFit.contain,
-            ),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
