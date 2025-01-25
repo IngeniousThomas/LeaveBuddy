@@ -332,7 +332,7 @@ class _CalendarPageState extends State<CalendarPage> {
                   todayDecoration: BoxDecoration(
                     color: themeProvider.isDarkMode
                         ? Colors.deepPurpleAccent
-                        : Colors.deepPurple,
+                        : Colors.deepPurpleAccent,
                     shape: BoxShape.circle,
                   ),
                   selectedDecoration: BoxDecoration(
