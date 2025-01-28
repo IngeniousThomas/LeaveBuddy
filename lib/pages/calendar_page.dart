@@ -28,6 +28,21 @@ class _CalendarPageState extends State<CalendarPage> {
     _loadEvents();
   }
 
+  void _goToToday() {
+    setState(() {
+      _focusedDay = DateTime.now();
+      _selectedDay = DateTime.now();
+    });
+  }
+
+  String _getMonthName(int month) {
+    const months = [
+      'January', 'February', 'March', 'April', 'May', 'June',
+      'July', 'August', 'September', 'October', 'November', 'December'
+    ];
+    return months[month - 1];
+  }
+
   void _showDatePickerDialog() {
     showDatePicker(
       context: context,
@@ -85,6 +100,7 @@ class _CalendarPageState extends State<CalendarPage> {
     return false;
   }
 
+  // ignore: unused_element
   bool _isRangeStart(DateTime date) {
     return _selectedRanges.any((range) => date.isAtSameMomentAs(range.$1));
   }
@@ -119,6 +135,13 @@ class _CalendarPageState extends State<CalendarPage> {
         _events[_selectedDay!] = [...(_events[_selectedDay!] ?? []), event];
       });
       _saveEvents();
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Please select a date first to add an event.'),
+          duration: Duration(seconds: 2),
+        ),
+      );
     }
   }
 
@@ -180,6 +203,16 @@ class _CalendarPageState extends State<CalendarPage> {
   }
 
   void _showAddEventDialog({bool isRange = false}) {
+    if (!isRange && _selectedDay == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Please select a date first to add an event.'),
+          duration: Duration(seconds: 2),
+        ),
+      );
+      return;
+    }
+
     final TextEditingController eventController = TextEditingController();
     showDialog(
       context: context,
@@ -320,43 +353,100 @@ class _CalendarPageState extends State<CalendarPage> {
                 },
                 eventLoader: _getEventsForDay,
                 headerStyle: HeaderStyle(
-                  titleCentered: true,
+                  titleCentered: false,
                   formatButtonVisible: false,
+                  leftChevronVisible: false,
+                  rightChevronVisible: false,
                   titleTextStyle: TextStyle(
-                    fontWeight: FontWeight.bold,
                     fontSize: 20,
                     color: themeProvider.isDarkMode ? Colors.white : Colors.black,
                   ),
                 ),
-                calendarStyle: CalendarStyle(
-                  todayDecoration: BoxDecoration(
-                    color: themeProvider.isDarkMode
-                        ? Colors.deepPurpleAccent
-                        : Colors.deepPurpleAccent,
-                    shape: BoxShape.circle,
-                  ),
-                  selectedDecoration: BoxDecoration(
-                    color: themeProvider.isDarkMode
-                        ? Colors.deepPurpleAccent
-                        : Colors.deepPurple,
-                    shape: BoxShape.circle,
-                  ),
-                  outsideTextStyle: TextStyle(
-                    color: themeProvider.isDarkMode
-                        ? Colors.grey[600]
-                        : Colors.grey[400],
-                  ),
-                  markersMaxCount: 4, // Limit dots per day
-                  markersAlignment: Alignment.bottomCenter, // Align dots at the bottom
-                  markerDecoration: BoxDecoration(
-                      color: themeProvider.isDarkMode ? Colors.white : Colors.black, // Dynamic color for markers
-                      shape: BoxShape.circle,
-                    ),
-                ),
                 calendarBuilders: CalendarBuilders(
+                  headerTitleBuilder: (context, day) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 16.0),
+                          child: RichText(
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: _getMonthName(day.month),
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: themeProvider.isDarkMode ? Colors.white : Colors.black,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: ' ${day.year}',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    color: themeProvider.isDarkMode ? Colors.white : Colors.black,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            IconButton(
+                              icon: const Icon(Icons.chevron_left),
+                              onPressed: () {
+                                setState(() {
+                                  _focusedDay = DateTime(
+                                    _focusedDay.year,
+                                    _focusedDay.month - 1,
+                                  );
+                                });
+                              },
+                            ),
+                            TextButton(
+                              onPressed: _goToToday,
+                              child: Text(
+                                'Today',
+                                style: TextStyle(
+                                  color: themeProvider.isDarkMode 
+                                      ? Colors.deepPurpleAccent 
+                                      : Colors.deepPurple,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            IconButton(
+                              icon: const Icon(Icons.chevron_right),
+                              onPressed: () {
+                                setState(() {
+                                  _focusedDay = DateTime(
+                                    _focusedDay.year,
+                                    _focusedDay.month + 1,
+                                  );
+                                });
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
+                    );
+                  },
+                  todayBuilder: (context, date, _) {
+                    return Center(
+                      child: Text(
+                        '${date.day}',
+                        style: TextStyle(
+                          color: themeProvider.isDarkMode 
+                              ? Colors.deepPurpleAccent 
+                              : Colors.deepPurple,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 17,
+                        ),
+                      ),
+                    );
+                  },
                   selectedBuilder: (context, date, _) {
-                    // ignore: unused_local_variable
-                    final isRangeStart = _isRangeStart(date);
                     final isRangeEnd = _isRangeEnd(date);
                     final isInRange = _isDateInRanges(date);
 
@@ -404,17 +494,19 @@ class _CalendarPageState extends State<CalendarPage> {
                     );
                   },
                   dowBuilder: (context, day) {
-                    if (day.weekday == DateTime.sunday) {
-                      return Center(
-                        child: Text(
-                          'Sun',
-                          style: TextStyle(
-                            color: themeProvider.isDarkMode ? Colors.red[200] : Colors.red,
-                          ),
+                    final weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+                    final text = weekDays[day.weekday % 7];
+                    return Center(
+                      child: Text(
+                        text,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: day.weekday == DateTime.sunday 
+                              ? (themeProvider.isDarkMode ? Colors.red[200] : Colors.red)
+                              : (themeProvider.isDarkMode ? Colors.white : Colors.black),
                         ),
-                      );
-                    }
-                    return null;
+                      ),
+                    );
                   },
                   defaultBuilder: (context, day, focusedDay) {
                     if (day.weekday == DateTime.sunday) {
@@ -429,6 +521,36 @@ class _CalendarPageState extends State<CalendarPage> {
                     }
                     return null;
                   },
+                ),
+                calendarStyle: CalendarStyle(
+                  todayTextStyle: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                  todayDecoration: BoxDecoration(
+                    color: themeProvider.isDarkMode
+                        ? Colors.deepPurpleAccent
+                        : Colors.deepPurple,
+                    shape: BoxShape.circle,
+                  ),
+                  selectedDecoration: BoxDecoration(
+                    color: themeProvider.isDarkMode
+                        ? Colors.deepPurpleAccent
+                        : Colors.deepPurple,
+                    shape: BoxShape.circle,
+                  ),
+                  outsideTextStyle: TextStyle(
+                    color: themeProvider.isDarkMode
+                        ? Colors.grey[600]
+                        : Colors.grey[400],
+                  ),
+                  markersMaxCount: 4,
+                  markersAlignment: Alignment.bottomCenter,
+                  markerDecoration: BoxDecoration(
+                    color: themeProvider.isDarkMode ? Colors.white : Colors.black,
+                    shape: BoxShape.circle,
+                  ),
                 ),
               ),
               Padding(
@@ -454,16 +576,16 @@ class _CalendarPageState extends State<CalendarPage> {
                         backgroundColor: themeProvider.isDarkMode
                             ? const Color(0xFFF5F5F5)
                             : const Color(0xFFF5F5F5),
-                          foregroundColor: Colors.deepPurple, // Text and icon color for default state
-                            ),
-                            icon: Icon(
-                              _isSelectingRange ? Icons.cancel : Icons.select_all,
-                              color: _isSelectingRange ? Colors.deepPurple : Colors.deepPurple, // Change icon color dynamically
-                            ),
-                            label: Text(
-                              _isSelectingRange ? 'Cancel' : 'Range',
-                              style: const TextStyle(color: Colors.deepPurple), // Ensure text color matches
-                            ),
+                        foregroundColor: Colors.deepPurple,
+                      ),
+                      icon: Icon(
+                        _isSelectingRange ? Icons.cancel : Icons.select_all,
+                        color: _isSelectingRange ? Colors.deepPurple : Colors.deepPurple,
+                      ),
+                      label: Text(
+                        _isSelectingRange ? 'Cancel' : 'Select Range',
+                        style: const TextStyle(color: Colors.deepPurple),
+                      ),
                     ),
                     ElevatedButton(
                       onPressed: _isSelectingRange && _selectedRanges.isNotEmpty
@@ -486,120 +608,14 @@ class _CalendarPageState extends State<CalendarPage> {
                 ),
               ),
               Expanded(
-                child: _isSelectingRange
-                    ? (_selectedRanges.isEmpty
-                        ? Center(
-                            child: Text(
-                              _tempRangeStart != null
-                                  ? 'Now select the end date'
-                                  : 'Select the first date',
-                              style: TextStyle(
-                                color: themeProvider.isDarkMode
-                                    ? Colors.grey[400]
-                                    : Colors.grey[600],
-                              ),
-                            ),
-                          )
-                        : ListView.builder(
-                            itemCount: _selectedRanges.length,
-                            itemBuilder: (context, index) {
-                              final range = _selectedRanges[index];
-                              final groupedEvents = _getGroupedRangeEvents(range);
-
-                              return Card(
-                                margin: const EdgeInsets.symmetric(
-                                  vertical: 4,
-                                  horizontal: 8,
-                                ),
-                                child: ListTile(
-                                  title: Text(
-                                    'Range ${index + 1}: ${range.$1.day}/${range.$1.month} - ${range.$2.day}/${range.$2.month}',
-                                  ),
-                                  subtitle: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      ...groupedEvents.entries.map((entry) {
-                                        final eventName = entry.key;
-                                        final (start, end, dates) = entry.value;
-
-                                        if (dates.length > 6) {
-                                          return Padding(
-                                            padding: const EdgeInsets.only(top: 4),
-                                            child: Text(
-                                              '$eventName (${start.day}/${start.month} - ${end.day}/${end.month})',
-                                            ),
-                                          );
-                                        } else {
-                                          return Padding(
-                                            padding: const EdgeInsets.only(top: 4),
-                                            child: Text(
-                                              '${dates.map((d) => '${d.day}/${d.month}').join(', ')}: $eventName',
-                                            ),
-                                          );
-                                        }
-                                      }),
-                                    ],
-                                  ),
-                                  trailing: IconButton(
-                                    icon: const Icon(Icons.close),
-                                    onPressed: () {
-                                      setState(() {
-                                        _selectedRanges.removeAt(index);
-                                      });
-                                    },
-                                  ),
-                                ),
-                              );
-                            },
-                          ))
-                    : (_selectedDay == null
-                        ? Center(
-                            child: Text(
-                              'Select a day to view events',
-                              style: TextStyle(
-                                color: themeProvider.isDarkMode
-                                    ? Colors.grey[400]
-                                    : Colors.grey[600],
-                              ),
-                            ),
-                          )
-                        : ListView(
-                            children: _getEventsForDay(_selectedDay!)
-                                .map((event) => Card(
-                                      margin: const EdgeInsets.symmetric(
-                                        vertical: 4,
-                                        horizontal: 8,
-                                      ),
-                                      child: ListTile(
-                                        title: Text(event),
-                                        trailing: Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            IconButton(
-                                              icon: const Icon(Icons.edit),
-                                              onPressed: () =>
-                                                  _showEditEventDialog(event),
-                                            ),
-                                            IconButton(
-                                              icon: const Icon(Icons.delete),
-                                              onPressed: () =>
-                                                  _deleteEvent(_selectedDay!, event),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ))
-                                .toList(),
-                          )),
+                child: _buildEventList(),
               ),
               const Footer(),
             ],
           ),
           floatingActionButton: !_isSelectingRange
               ? FloatingActionButton(
-                  onPressed: _selectedDay != null
-                      ? () => _showAddEventDialog(isRange: false)
-                      : null,
+                  onPressed: () => _showAddEventDialog(isRange: false),
                   backgroundColor: themeProvider.isDarkMode
                       ? Colors.deepPurpleAccent
                       : Colors.deepPurple,
@@ -609,6 +625,121 @@ class _CalendarPageState extends State<CalendarPage> {
               : null,
         );
       },
+    );
+  }
+
+  Widget _buildEventList() {
+    if (_isSelectingRange) {
+      if (_selectedRanges.isEmpty) {
+        return Consumer<ThemeProvider>(
+          builder: (context, themeProvider, _) => Center(
+            child: Text(
+              _tempRangeStart != null
+                  ? 'Now select the end date'
+                  : 'Select the first date',
+              style: TextStyle(
+                color: themeProvider.isDarkMode
+                    ? Colors.grey[400]
+                    : Colors.grey[600],
+              ),
+            ),
+          ),
+        );
+      }
+      return ListView.builder(
+        itemCount: _selectedRanges.length,
+        itemBuilder: (context, index) {
+          final range = _selectedRanges[index];
+          final groupedEvents = _getGroupedRangeEvents(range);
+
+          return Card(
+            margin: const EdgeInsets.symmetric(
+              vertical: 4,
+              horizontal: 8,
+            ),
+            child: ListTile(
+              title: Text(
+                'Range ${index + 1}: ${range.$1.day}/${range.$1.month} - ${range.$2.day}/${range.$2.month}',
+              ),
+              subtitle: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ...groupedEvents.entries.map((entry) {
+                    final eventName = entry.key;
+                    final (start, end, dates) = entry.value;
+
+                    if (dates.length > 6) {
+                      return Padding(
+                        padding: const EdgeInsets.only(top: 4),
+                        child: Text(
+                          '$eventName (${start.day}/${start.month} - ${end.day}/${end.month})',
+                        ),
+                      );
+                    } else {
+                      return Padding(
+                        padding: const EdgeInsets.only(top: 4),
+                        child: Text(
+                          '${dates.map((d) => '${d.day}/${d.month}').join(', ')}: $eventName',
+                        ),
+                      );
+                    }
+                  }),
+                ],
+              ),
+              trailing: IconButton(
+                icon: const Icon(Icons.close),
+                onPressed: () {
+                  setState(() {
+                    _selectedRanges.removeAt(index);
+                  });
+                },
+              ),
+            ),
+          );
+        },
+      );
+    }
+
+    if (_selectedDay == null) {
+      return Consumer<ThemeProvider>(
+        builder: (context, themeProvider, _) => Center(
+          child: Text(
+            'Select a day to view events',
+            style: TextStyle(
+              color: themeProvider.isDarkMode
+                  ? Colors.grey[400]
+                  : Colors.grey[600],
+            ),
+          ),
+        ),
+      );
+    }
+
+    return ListView(
+      children: _getEventsForDay(_selectedDay!)
+          .map((event) => Card(
+                margin: const EdgeInsets.symmetric(
+                  vertical: 4,
+                  horizontal: 8,
+                ),
+                child: ListTile(
+                  title: Text(event),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.edit),
+                        onPressed: () => _showEditEventDialog(event),
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.delete),
+                        onPressed: () => _deleteEvent(_selectedDay!, event),
+                      ),
+                    ],
+                  ),
+                ),
+              ))
+          .toList(),
     );
   }
 }
