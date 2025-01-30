@@ -48,10 +48,11 @@ dev_dependencies:
   flutter_lints: ^5.0.0 # Lint rules for improving code quality
 
 # Configuration for flutter_launcher_icons
-flutter_icons:
+flutter_launcher_icons:
   # Android-specific configuration
   android: "launcher_icon" # Icon name for Android
   ios: true                # Enable icon generation for iOS
+  remove_alpha_ios: true  # Remove alpha channel from iOS icon
   image_path: "assets/icon/abouticon.png" # Base icon file for all platforms
   web:
     generate: true

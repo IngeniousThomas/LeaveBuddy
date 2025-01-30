@@ -28,7 +28,7 @@ class AboutPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 CircleAvatar(
-                  radius: 60,
+                  radius: 100,
                   backgroundImage: AssetImage('assets/icon/abouticon.png'),
                 ),
                 const SizedBox(height: 16),
@@ -66,19 +66,19 @@ class AboutPage extends StatelessWidget {
                         ),
                         const SizedBox(height: 12),
                         ListTile(
-                          leading: const Icon(Icons.cloud_circle_sharp, color: Colors.deepPurple),
+                          leading: const Icon(Icons.cloud_circle_sharp, color: Colors.deepPurpleAccent),
                           title: const Text('Website'),
                           subtitle: const Text('leavebuddy.vercel.app'),
                           onTap: () => _launchURL('https://leavebuddy.vercel.app/'),
                         ),
                         ListTile(
-                          leading: const FaIcon(FontAwesomeIcons.linkedin, color: Colors.deepPurple),
+                          leading: const FaIcon(FontAwesomeIcons.linkedin, color: Colors.deepPurpleAccent),
                           title: const Text('LinkedIn'),
                           subtitle: const Text('linkedin.com/in/arunthomas-hyd'),
                           onTap: () => _launchURL('https://www.linkedin.com/in/arunthomas-hyd/'),
                         ),
                         ListTile(
-                          leading: const FaIcon(FontAwesomeIcons.github, color: Colors.deepPurple),
+                          leading: const FaIcon(FontAwesomeIcons.github, color: Colors.deepPurpleAccent),
                           title: const Text('Github'),
                           subtitle: const Text('github.com/IngeniousThomas/LeaveBuddy - For Updates'),
                           onTap: () => _launchURL('https://github.com/IngeniousThomas/LeaveBuddy.git'),
@@ -96,7 +96,7 @@ class AboutPage extends StatelessWidget {
                 const SizedBox(height: 4),
                 const Text(
                   'Nissaram allae ellam ;)',
-                  style: TextStyle(fontSize: 12, color: Colors.deepPurple),
+                  style: TextStyle(fontSize: 12, color: Colors.deepPurpleAccent),
                   textAlign: TextAlign.center,
                 ),
 
